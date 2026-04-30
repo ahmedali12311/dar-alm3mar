@@ -95,12 +95,12 @@ export default function HomeServicesSection() {
           
           {/* الجانب الأيمن: القائمة والمحتوى الثابت */}
           <div className="lg:sticky lg:top-32 lg:h-fit text-right">
-            <span className={`${eyebrowClass} !text-[#bf6a33] border-r-2 border-[#bf6a33] pr-4`}>
+            <span className={`${eyebrowClass} !text-[#0ea5e9] border-r-2 border-[#0ea5e9] pr-4`}>
               مسار العمل
             </span>
             <h2 className={`mt-6 ${sectionHeadingClass} !text-4xl md:!text-5xl lg:!text-6xl text-slate-900`}>
               من الفكرة <br />
-              <span className="text-slate-400 font-light underline decoration-[#bf6a33]/30 underline-offset-8">إلى الواقع</span>
+              <span className="text-slate-400 font-light underline decoration-[#0ea5e9]/30 underline-offset-8">إلى الواقع</span>
             </h2>
             <p className={`mt-8 ${paragraphClass} ml-auto max-w-sm text-slate-500 leading-relaxed`}>
               نرافقك في رحلة البناء عبر منهجية هندسية دقيقة، تبدأ بالتخطيط المبتكر وتنتهي بإشراف يضمن أعلى معايير الجودة.
@@ -117,9 +117,9 @@ export default function HomeServicesSection() {
                     }`}
                   >
                     <div className={`absolute right-0 top-1/2 -translate-y-1/2 h-8 w-1 transition-all duration-500 ${
-                      isActive ? "bg-[#bf6a33] h-full" : "bg-slate-200"
+                      isActive ? "bg-[#0ea5e9] h-full" : "bg-slate-200"
                     }`} />
-                    <span className="font-mono text-xs font-bold text-[#bf6a33]">0{index + 1}</span>
+                    <span className="font-mono text-xs font-bold text-[#0ea5e9]">0{index + 1}</span>
                     <p className={`mt-1 font-['Cairo'] text-lg font-bold ${isActive ? "text-slate-900" : "text-slate-400"}`}>
                       {service.title}
                     </p>
@@ -149,7 +149,7 @@ export default function HomeServicesSection() {
                     >
                       <div className="flex flex-col sm:flex-row items-center sm:items-stretch justify-between gap-4 p-6 sm:gap-8 sm:p-10 md:p-12">
                         <div className="min-w-0 flex-1 text-right">
-                          <div className="mb-3 text-[#bf6a33] font-mono text-sm font-bold tracking-tighter italic" />
+                          <div className="mb-3 text-[#0ea5e9] font-mono text-sm font-bold tracking-tighter italic" />
                           <h3 className="font-['Cairo'] text-xl sm:text-2xl md:text-3xl font-black text-slate-900 mb-4">
                             {service.title}
                           </h3>

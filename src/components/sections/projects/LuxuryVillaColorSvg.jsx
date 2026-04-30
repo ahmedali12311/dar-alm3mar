@@ -48,14 +48,7 @@ export default function LuxuryVillaColorSvg() {
           <stop offset="0%" stopColor="#e0e0e0" />
           <stop offset="100%" stopColor="#cacaca" />
         </linearGradient>
-        {/* Soft vignette sky */}
-        <radialGradient id="sky" cx="50%" cy="0%" r="70%">
-          <stop offset="0%" stopColor="#f5f5f5" stopOpacity="0" />
-          <stop offset="100%" stopColor="#e8e8e8" stopOpacity="0" />
-        </radialGradient>
       </defs>
-
-      {/* ── Sky vignette removed to make background transparent ── */}
 
       {/* ══════════════════════════════════════
           GROUND LINE + TERRAIN
@@ -241,36 +234,48 @@ export default function LuxuryVillaColorSvg() {
           TALL PALMS
          ══════════════════════════════════════ */}
       <motion.g {...fade(1.15, 0.6)}>
-        {/* Left palm trunk — organic curve */}
-        <path d="M46 360 Q50 328 44 298 Q48 266 43 240 Q47 216 44 192 Q46 172 43 154"
-          stroke="#111" strokeWidth="3.2" strokeLinecap="round" fill="none" />
-        {/* Left fronds */}
-        {[
-          "M43 154 Q20 134 10 112",
-          "M43 154 Q32 128 28 106",
-          "M43 154 Q58 134 66 116",
-          "M43 154 Q62 144 76 136",
-          "M43 154 Q22 156 8 150",
-          "M43 154 Q40 136 46 120",
-        ].map((d, i) => (
-          <motion.path key={i} d={d} stroke="#111" strokeWidth="1.8" strokeLinecap="round" fill="none"
-            {...draw(1.2 + i * 0.08, 0.45)} />
-        ))}
+        <motion.g
+          animate={{ rotate: [-0.5, 1.5, -0.5] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformOrigin: "46px 360px" }}
+        >
+          {/* Left palm trunk — organic curve */}
+          <path d="M46 360 Q50 328 44 298 Q48 266 43 240 Q47 216 44 192 Q46 172 43 154"
+            stroke="#111" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+          {/* Left fronds */}
+          {[
+            "M43 154 Q20 134 10 112",
+            "M43 154 Q32 128 28 106",
+            "M43 154 Q58 134 66 116",
+            "M43 154 Q62 144 76 136",
+            "M43 154 Q22 156 8 150",
+            "M43 154 Q40 136 46 120",
+          ].map((d, i) => (
+            <motion.path key={i} d={d} stroke="#111" strokeWidth="1.8" strokeLinecap="round" fill="none"
+              {...draw(1.2 + i * 0.08, 0.45)} />
+          ))}
+        </motion.g>
 
-        {/* Right palm */}
-        <path d="M954 360 Q950 326 956 294 Q952 262 957 236 Q953 210 956 186 Q954 166 957 148"
-          stroke="#111" strokeWidth="3.2" strokeLinecap="round" fill="none" />
-        {[
-          "M957 148 Q978 128 990 106",
-          "M957 148 Q968 122 972 100",
-          "M957 148 Q942 128 934 110",
-          "M957 148 Q938 140 924 132",
-          "M957 148 Q976 150 990 144",
-          "M957 148 Q960 130 954 114",
-        ].map((d, i) => (
-          <motion.path key={i} d={d} stroke="#111" strokeWidth="1.8" strokeLinecap="round" fill="none"
-            {...draw(1.3 + i * 0.08, 0.45)} />
-        ))}
+        <motion.g
+          animate={{ rotate: [0.5, -1.5, 0.5] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          style={{ transformOrigin: "954px 360px" }}
+        >
+          {/* Right palm */}
+          <path d="M954 360 Q950 326 956 294 Q952 262 957 236 Q953 210 956 186 Q954 166 957 148"
+            stroke="#111" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+          {[
+            "M957 148 Q978 128 990 106",
+            "M957 148 Q968 122 972 100",
+            "M957 148 Q942 128 934 110",
+            "M957 148 Q938 140 924 132",
+            "M957 148 Q976 150 990 144",
+            "M957 148 Q960 130 954 114",
+          ].map((d, i) => (
+            <motion.path key={i} d={d} stroke="#111" strokeWidth="1.8" strokeLinecap="round" fill="none"
+              {...draw(1.3 + i * 0.08, 0.45)} />
+          ))}
+        </motion.g>
       </motion.g>
 
       {/* ══════════════════════════════════════
@@ -278,16 +283,28 @@ export default function LuxuryVillaColorSvg() {
          ══════════════════════════════════════ */}
       <motion.g {...fade(1.45, 0.6)}>
         {/* Left tree */}
-        <line x1="282" y1="360" x2="280" y2="312" stroke="#111" strokeWidth="2.2" strokeLinecap="round" />
-        <ellipse cx="278" cy="298" rx="20" ry="24" stroke="#111" strokeWidth="1.5" fill="white" />
-        <ellipse cx="278" cy="293" rx="13" ry="16" stroke="#111" strokeWidth="0.9" fill="#ebebeb" />
-        <ellipse cx="272" cy="305" rx="8" ry="7" stroke="#111" strokeWidth="0.7" fill="white" />
+        <motion.g
+          animate={{ rotate: [-1, 1, -1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformOrigin: "282px 360px" }}
+        >
+          <line x1="282" y1="360" x2="280" y2="312" stroke="#111" strokeWidth="2.2" strokeLinecap="round" />
+          <ellipse cx="278" cy="298" rx="20" ry="24" stroke="#111" strokeWidth="1.5" fill="white" />
+          <ellipse cx="278" cy="293" rx="13" ry="16" stroke="#111" strokeWidth="0.9" fill="#ebebeb" />
+          <ellipse cx="272" cy="305" rx="8" ry="7" stroke="#111" strokeWidth="0.7" fill="white" />
+        </motion.g>
 
         {/* Right tree */}
-        <line x1="718" y1="360" x2="720" y2="312" stroke="#111" strokeWidth="2.2" strokeLinecap="round" />
-        <ellipse cx="722" cy="298" rx="20" ry="24" stroke="#111" strokeWidth="1.5" fill="white" />
-        <ellipse cx="722" cy="293" rx="13" ry="16" stroke="#111" strokeWidth="0.9" fill="#ebebeb" />
-        <ellipse cx="728" cy="305" rx="8" ry="7" stroke="#111" strokeWidth="0.7" fill="white" />
+        <motion.g
+          animate={{ rotate: [1, -1, 1] }}
+          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          style={{ transformOrigin: "718px 360px" }}
+        >
+          <line x1="718" y1="360" x2="720" y2="312" stroke="#111" strokeWidth="2.2" strokeLinecap="round" />
+          <ellipse cx="722" cy="298" rx="20" ry="24" stroke="#111" strokeWidth="1.5" fill="white" />
+          <ellipse cx="722" cy="293" rx="13" ry="16" stroke="#111" strokeWidth="0.9" fill="#ebebeb" />
+          <ellipse cx="728" cy="305" rx="8" ry="7" stroke="#111" strokeWidth="0.7" fill="white" />
+        </motion.g>
       </motion.g>
 
       {/* ══════════════════════════════════════
@@ -295,15 +312,27 @@ export default function LuxuryVillaColorSvg() {
          ══════════════════════════════════════ */}
       <motion.g {...fade(1.55, 0.5)}>
         {/* Left hedge row */}
-        <path d="M76,360 Q90,344 104,360 Q118,344 132,360 Q146,344 160,360 Q174,344 188,360 Q202,344 216,360"
-          stroke="#111" strokeWidth="1.5" fill="white" />
-        <path d="M82,360 Q94,350 106,360 Q118,350 130,360 Q142,350 154,360 Q166,350 178,360"
-          stroke="#111" strokeWidth="0.8" fill="none" opacity="0.4" />
+        <motion.g
+          animate={{ skewX: [-1, 2, -1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformOrigin: "146px 360px" }}
+        >
+          <path d="M76,360 Q90,344 104,360 Q118,344 132,360 Q146,344 160,360 Q174,344 188,360 Q202,344 216,360"
+            stroke="#111" strokeWidth="1.5" fill="white" />
+          <path d="M82,360 Q94,350 106,360 Q118,350 130,360 Q142,350 154,360 Q166,350 178,360"
+            stroke="#111" strokeWidth="0.8" fill="none" opacity="0.4" />
+        </motion.g>
         {/* Right hedge row */}
-        <path d="M784,360 Q798,344 812,360 Q826,344 840,360 Q854,344 868,360 Q882,344 896,360 Q910,344 924,360"
-          stroke="#111" strokeWidth="1.5" fill="white" />
-        <path d="M790,360 Q802,350 814,360 Q826,350 838,360 Q850,350 862,360 Q874,350 886,360"
-          stroke="#111" strokeWidth="0.8" fill="none" opacity="0.4" />
+        <motion.g
+          animate={{ skewX: [1, -2, 1] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          style={{ transformOrigin: "854px 360px" }}
+        >
+          <path d="M784,360 Q798,344 812,360 Q826,344 840,360 Q854,344 868,360 Q882,344 896,360 Q910,344 924,360"
+            stroke="#111" strokeWidth="1.5" fill="white" />
+          <path d="M790,360 Q802,350 814,360 Q826,350 838,360 Q850,350 862,360 Q874,350 886,360"
+            stroke="#111" strokeWidth="0.8" fill="none" opacity="0.4" />
+        </motion.g>
       </motion.g>
 
       {/* ══════════════════════════════════════
@@ -320,6 +349,16 @@ export default function LuxuryVillaColorSvg() {
         <line x1="60" y1="408" x2="60" y2="422" stroke="#915025" strokeWidth="0.9" />
         <line x1="940" y1="408" x2="940" y2="422" stroke="#915025" strokeWidth="0.9" />
         <text x="500" y="430" textAnchor="middle" fill="#915025" fontSize="9" fontFamily="monospace">24.00 m</text>
+
+        {/* Height markers */}
+        <line x1="22" y1="360" x2="22" y2="54" stroke="#915025" strokeWidth="0.8" strokeDasharray="5 3" />
+        <line x1="15" y1="360" x2="29" y2="360" stroke="#915025" strokeWidth="0.8" />
+        <line x1="15" y1="230" x2="29" y2="230" stroke="#915025" strokeWidth="0.8" />
+        <line x1="15" y1="78" x2="29" y2="78" stroke="#915025" strokeWidth="0.8" />
+        <line x1="15" y1="54" x2="29" y2="54" stroke="#915025" strokeWidth="0.8" />
+        <text x="11" y="363" textAnchor="end" fill="#915025" fontSize="8" fontFamily="monospace">±0.00</text>
+        <text x="11" y="233" textAnchor="end" fill="#915025" fontSize="8" fontFamily="monospace">+3.90</text>
+        <text x="11" y="81" textAnchor="end" fill="#915025" fontSize="8" fontFamily="monospace">+7.80</text>
         <text x="950" y="432" textAnchor="end" fill="#915025" fontSize="8" fontFamily="monospace">SCALE 1:100</text>
       </motion.g>
 
@@ -327,10 +366,54 @@ export default function LuxuryVillaColorSvg() {
           BIRDS — life detail
          ══════════════════════════════════════ */}
       <motion.g {...fade(2.1, 0.9)} opacity="0.28">
-        <path d="M580 36 Q586 31 592 36" stroke="#111" strokeWidth="1.3" fill="none" />
-        <path d="M604 26 Q610 21 616 26" stroke="#111" strokeWidth="1.3" fill="none" />
-        <path d="M628 40 Q633 36 638 40" stroke="#111" strokeWidth="1.2" fill="none" />
-        <path d="M650 30 Q654 27 658 30" stroke="#111" strokeWidth="1.1" fill="none" />
+        <motion.path 
+          stroke="#111" strokeWidth="1.3" fill="none" 
+          animate={{ 
+            d: ["M580 36 Q586 31 592 36", "M580 36 Q586 39 592 36", "M580 36 Q586 31 592 36"],
+            y: [0, -6, 0],
+            x: [0, -12, 0]
+          }}
+          transition={{ 
+            d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" },
+            default: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }
+          }}
+        />
+        <motion.path 
+          stroke="#111" strokeWidth="1.3" fill="none" 
+          animate={{ 
+            d: ["M604 26 Q610 21 616 26", "M604 26 Q610 29 616 26", "M604 26 Q610 21 616 26"],
+            y: [0, 5, 0],
+            x: [0, -15, 0]
+          }}
+          transition={{ 
+            d: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 },
+            default: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }
+          }}
+        />
+        <motion.path 
+          stroke="#111" strokeWidth="1.2" fill="none" 
+          animate={{ 
+            d: ["M628 40 Q633 36 638 40", "M628 40 Q633 43 638 40", "M628 40 Q633 36 638 40"],
+            y: [0, -4, 0],
+            x: [0, -10, 0]
+          }}
+          transition={{ 
+            d: { duration: 1.0, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
+            default: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+          }}
+        />
+        <motion.path 
+          stroke="#111" strokeWidth="1.1" fill="none" 
+          animate={{ 
+            d: ["M650 30 Q654 27 658 30", "M650 30 Q654 33 658 30", "M650 30 Q654 27 658 30"],
+            y: [0, 3, 0],
+            x: [0, -8, 0]
+          }}
+          transition={{ 
+            d: { duration: 1.3, repeat: Infinity, ease: "easeInOut", delay: 0.1 },
+            default: { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }
+          }}
+        />
       </motion.g>
     </motion.svg>
   );

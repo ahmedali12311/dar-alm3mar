@@ -103,7 +103,7 @@ export default function GalleryPage() {
     <main className="grid w-full gap-0 py-0">
       <GalleryHeroSection />
 
-      <div className="relative bg-[#f4f0e8] pt-10 pb-8">
+      <div className="relative bg-[#f1f5f9] pt-10 pb-8">
         <div className={containerClass}>
 
           {/* Premium Grid Gallery */}
@@ -116,17 +116,17 @@ export default function GalleryPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: (i % 6) * 0.1 }}
                 onClick={() => setSelectedIndex(img.id)}
-                className={`group relative cursor-pointer overflow-hidden rounded-[2rem] bg-white transition-all duration-700 hover:shadow-[0_20px_50px_rgba(145,80,37,0.12)] ${img.span}`}
+                className={`group relative cursor-pointer overflow-hidden rounded-[2rem] bg-white transition-all duration-700 hover:shadow-[0_20px_50px_rgba(2, 132, 199,0.12)] ${img.span}`}
               >
                 <SafeImage
                   src={img.src}
                   alt={img.title}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#102933]/90 via-[#102933]/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/20 to-transparent opacity-0 transition-all duration-500 group-hover:opacity-100" />
 
                 <div className="absolute bottom-0 inset-x-0 p-8 translate-y-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                  <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#bf6a33] mb-2 block">
+                  <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#0ea5e9] mb-2 block">
                     Project Detail
                   </span>
                   <h3 className="font-['Cairo'] text-xl font-bold text-white leading-snug">
@@ -150,10 +150,10 @@ export default function GalleryPage() {
               <button
                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
-                className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 transition-all hover:text-[#915025] disabled:opacity-20"
+                className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 transition-all hover:text-[#0284c7] disabled:opacity-20"
               >
                 <span>السابق</span>
-                <span className="h-px w-6 bg-slate-300 transition-all group-hover:w-10 group-hover:bg-[#915025]" />
+                <span className="h-px w-6 bg-slate-300 transition-all group-hover:w-10 group-hover:bg-[#0284c7]" />
               </button>
 
               <div className="flex items-center gap-4">
@@ -161,12 +161,12 @@ export default function GalleryPage() {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`relative h-10 w-10 text-[12px] font-black transition-all ${currentPage === i + 1 ? "text-[#915025]" : "text-slate-300 hover:text-slate-600"
+                    className={`relative h-10 w-10 text-[12px] font-black transition-all ${currentPage === i + 1 ? "text-[#0284c7]" : "text-slate-300 hover:text-slate-600"
                       }`}
                   >
                     {String(i + 1).padStart(2, "0")}
                     {currentPage === i + 1 && (
-                      <motion.span layoutId="page-dot" className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-[#915025]" />
+                      <motion.span layoutId="page-dot" className="absolute -bottom-2 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-[#0284c7]" />
                     )}
                   </button>
                 ))}
@@ -175,9 +175,9 @@ export default function GalleryPage() {
               <button
                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
-                className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 transition-all hover:text-[#915025] disabled:opacity-20"
+                className="group flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 transition-all hover:text-[#0284c7] disabled:opacity-20"
               >
-                <span className="h-px w-6 bg-slate-300 transition-all group-hover:w-10 group-hover:bg-[#915025]" />
+                <span className="h-px w-6 bg-slate-300 transition-all group-hover:w-10 group-hover:bg-[#0284c7]" />
                 <span>التالي</span>
               </button>
             </div>
@@ -232,7 +232,7 @@ export default function GalleryPage() {
                     <button
                       key={i}
                       onClick={(e) => { e.stopPropagation(); setSelectedIndex(i); }}
-                      className={`h-1 shrink-0 transition-all duration-500 rounded-full ${selectedIndex === i ? "w-8 bg-gradient-to-r from-[#915025] to-[#bf6a33]" : "w-1 bg-white/10"
+                      className={`h-1 shrink-0 transition-all duration-500 rounded-full ${selectedIndex === i ? "w-8 bg-gradient-to-r from-[#0284c7] to-[#0ea5e9]" : "w-1 bg-white/10"
                         }`}
                     />
                   ))}

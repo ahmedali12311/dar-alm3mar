@@ -14,7 +14,7 @@ export default function HomeProjectsSection() {
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="mb-4 text-[10px] font-black uppercase tracking-[0.5em] text-[#915025]"
+            className="mb-4 text-[10px] font-black uppercase tracking-[0.5em] text-[#0284c7]"
           >
             التميز المعماري
           </motion.span>
@@ -24,7 +24,7 @@ export default function HomeProjectsSection() {
             transition={{ delay: 0.1 }}
             className="font-['Cairo'] text-5xl font-black text-slate-900 md:text-6xl"
           >
-            مشاريع <span className="text-[#915025]">مختارة</span>
+            مشاريع <span className="text-[#0284c7]">مختارة</span>
           </motion.h2>
         </div>
 
@@ -46,7 +46,7 @@ export default function HomeProjectsSection() {
 
               {/* Morphing Image Container */}
               <motion.div 
-                className="relative aspect-[3/4] overflow-hidden bg-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700 group-hover:shadow-[0_40px_80px_-15px_rgba(145,80,37,0.15)]"
+                className="relative aspect-[3/4] overflow-hidden bg-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700 group-hover:shadow-[0_40px_80px_-15px_rgba(2, 132, 199,0.15)]"
                 // هنا السحر: تغيير الـ Border Radius بشكل مستمر وانسيابي
                 animate={{
                   borderRadius: [
@@ -68,7 +68,7 @@ export default function HomeProjectsSection() {
                   className="h-full w-full object-cover transition-transform duration-[3s] group-hover:scale-110"
                 />
                 
-                <div className="absolute inset-0 bg-[#102933]/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-[#0f172a]/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 
                 <div className="absolute bottom-6 right-6">
                   <span className="rounded-full bg-white/95 px-4 py-2 text-[10px] font-bold text-slate-900 shadow-xl">
@@ -79,7 +79,7 @@ export default function HomeProjectsSection() {
 
               {/* Content */}
               <div className="mt-10 text-right">
-                <h3 className="font-['Cairo'] text-2xl font-black text-slate-800 transition-colors group-hover:text-[#915025]">
+                <h3 className="font-['Cairo'] text-2xl font-black text-slate-800 transition-colors group-hover:text-[#0284c7]">
                   {project.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-slate-500">

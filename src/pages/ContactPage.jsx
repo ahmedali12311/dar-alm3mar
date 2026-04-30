@@ -7,7 +7,7 @@ const contactConnectors = [
   {
     from: "#ffffff",
     to: "#ffffff",
-    accent: "rgba(145, 80, 37, 0.3)",
+    accent: "rgba(2, 132, 199, 0.3)",
     heightClass: "h-16 md:h-20",
     variant: "blueprint",
   },

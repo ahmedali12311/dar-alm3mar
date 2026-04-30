@@ -9,7 +9,7 @@ export default function ProjectsDetailsSection() {
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.018]"
         style={{
-          backgroundImage: "radial-gradient(circle, #915025 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, #0284c7 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -19,8 +19,8 @@ export default function ProjectsDetailsSection() {
         <div className="mb-16 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <span className="h-px w-8 bg-[#915025]" />
-              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#915025]">
+              <span className="h-px w-8 bg-[#0284c7]" />
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#0284c7]">
                 مشاريع موثقة
               </span>
             </div>
@@ -53,7 +53,7 @@ export default function ProjectsDetailsSection() {
                 {/* Date badge */}
                 <div className="absolute bottom-5 right-5">
                   <span className="inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1.5 backdrop-blur-md">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#bf6a33]" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#0ea5e9]" />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-white/90">
                       {project.date}
                     </span>
@@ -67,12 +67,12 @@ export default function ProjectsDetailsSection() {
                   {/* Label */}
                   <div className="mb-5 flex items-center gap-3">
                     <span className="h-px w-6 bg-slate-200" />
-                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#915025]">
+                    <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#0284c7]">
                       مشروع
                     </span>
                   </div>
 
-                  <h3 className="font-['Cairo'] text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-[#915025] transition-colors duration-300">
+                  <h3 className="font-['Cairo'] text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-[#0284c7] transition-colors duration-300">
                     {project.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-slate-500 line-clamp-3">
@@ -102,7 +102,7 @@ export default function ProjectsDetailsSection() {
         <div className="mt-16 flex justify-center">
           <Link
             to="/gallery"
-            className="group flex items-center gap-4 rounded-full bg-slate-900 px-8 py-4 text-white transition-all duration-300 hover:bg-[#915025] hover:shadow-lg hover:shadow-[#915025]/20"
+            className="group flex items-center gap-4 rounded-full bg-slate-900 px-8 py-4 text-white transition-all duration-300 hover:bg-[#0284c7] hover:shadow-lg hover:shadow-[#0284c7]/20"
           >
             <span className="font-['Cairo'] text-sm font-bold tracking-wide">
               الاطلاع على معرض الصور

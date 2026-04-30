@@ -7,23 +7,23 @@ import { usePageMeta } from "../hooks/usePageMeta";
 
 const projectsConnectors = [
   {
-    from: "#faf7f4",
+    from: "#f8fafc",
     to: "#ffffff",
-    accent: "rgba(145, 80, 37, 0.3)",
+    accent: "rgba(2, 132, 199, 0.3)",
     heightClass: "h-20 md:h-28",
   },
   {
     // White (ProjectsDetails) → Light warm gray (ProjectsScopes)
     from: "#ffffff",
     to: "#f7f4ef",
-    accent: "rgba(145, 80, 37, 0.3)",
+    accent: "rgba(2, 132, 199, 0.3)",
     heightClass: "h-20 md:h-28",
   },
   {
     // Light warm gray (ProjectsScopes) → White (ProjectsProcess)
     from: "#f7f4ef",
     to: "#ffffff",
-    accent: "rgba(145, 80, 37, 0.25)",
+    accent: "rgba(2, 132, 199, 0.25)",
     heightClass: "h-20 md:h-28",
   },
 ];

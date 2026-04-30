@@ -32,14 +32,14 @@ export default function ProjectsHeroSection() {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative flex h-[100vh] min-h-[700px] flex-col overflow-hidden bg-[#faf7f4]"
+      className="relative flex h-[100vh] min-h-[700px] flex-col overflow-hidden bg-[#f8fafc]"
     >
       {/* ── Subtle dot grid ── */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(145,80,37,0.18) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(2, 132, 199,0.18) 1px, transparent 1px)",
           backgroundSize: "36px 36px",
         }}
       />
@@ -47,13 +47,13 @@ export default function ProjectsHeroSection() {
       {/* ── Corner accents ── */}
       <div className="pointer-events-none absolute inset-0 z-0">
         {/* Top-left */}
-        <div className="absolute top-32 left-8 w-20 h-20 border-l-2 border-t-2 border-[#915025]/30" />
+        <div className="absolute top-32 left-8 w-20 h-20 border-l-2 border-t-2 border-[#0284c7]/30" />
         {/* Top-right */}
-        <div className="absolute top-32 right-8 w-20 h-20 border-r-2 border-t-2 border-[#915025]/30" />
+        <div className="absolute top-32 right-8 w-20 h-20 border-r-2 border-t-2 border-[#0284c7]/30" />
         {/* Bottom-left */}
-        <div className="absolute bottom-24 left-8 w-20 h-20 border-l-2 border-b-2 border-[#915025]/15" />
+        <div className="absolute bottom-24 left-8 w-20 h-20 border-l-2 border-b-2 border-[#0284c7]/15" />
         {/* Bottom-right */}
-        <div className="absolute bottom-24 right-8 w-20 h-20 border-r-2 border-b-2 border-[#915025]/15" />
+        <div className="absolute bottom-24 right-8 w-20 h-20 border-r-2 border-b-2 border-[#0284c7]/15" />
       </div>
 
       {/* ── Center content wrapper ── */}
@@ -61,11 +61,11 @@ export default function ProjectsHeroSection() {
 
         {/* ── Eyebrow ── */}
         <motion.div {...fadeUp(0.1)} className="mb-8 flex items-center gap-4">
-          <span className="h-px w-10 bg-[#915025]/50" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.6em] text-[#915025]">
+          <span className="h-px w-10 bg-[#0284c7]/50" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.6em] text-[#0284c7]">
             Dar Al-Me'mar · Portfolio
           </span>
-          <span className="h-px w-10 bg-[#915025]/50" />
+          <span className="h-px w-10 bg-[#0284c7]/50" />
         </motion.div>
 
         {/* ── Title text ── */}
@@ -85,7 +85,7 @@ export default function ProjectsHeroSection() {
           </span>
           <span
             aria-hidden="true"
-            className="block font-black leading-none text-[#915025]"
+            className="block font-black leading-none text-[#0284c7]"
             style={{
               fontSize: "clamp(1rem, 2.5vw, 1.8rem)",
               letterSpacing: "0.2em",

@@ -14,22 +14,22 @@ export default function Layout({ children }) {
       ></div>
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed -left-24 top-24 -z-20 h-64 w-64 rounded-full bg-[#bf6a33]/15 blur-3xl"
+        className="pointer-events-none fixed -left-24 top-24 -z-20 h-64 w-64 rounded-full bg-[#0ea5e9]/15 blur-3xl"
       ></div>
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed -right-20 top-96 -z-20 h-60 w-60 rounded-full bg-[#102933]/15 blur-3xl"
+        className="pointer-events-none fixed -right-20 top-96 -z-20 h-60 w-60 rounded-full bg-[#0f172a]/15 blur-3xl"
       ></div>
       <div className="relative z-10">
         <Header />
         <div className="pt-0">
           {children}
         </div>
-        <div className={location.pathname === "/gallery" ? "bg-[#f4f0e8]" : "bg-white"}>
+        <div className={location.pathname === "/gallery" ? "bg-[#f1f5f9]" : "bg-white"}>
           <SectionConnector
-            from={location.pathname === "/gallery" ? "#f4f0e8" : "#ffffff"}
-            to="#FCFBFA"
-            accent="rgba(145, 80, 37, 0.3)"
+            from={location.pathname === "/gallery" ? "#f1f5f9" : "#ffffff"}
+            to="#ffffff"
+            accent="rgba(2, 132, 199, 0.3)"
             heightClass="h-24 md:h-32"
           />
         </div>

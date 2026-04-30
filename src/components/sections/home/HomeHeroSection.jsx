@@ -119,7 +119,7 @@ export default function HomeHeroSection() {
               <div className="max-w-2xl text-right">
                 <h2 className="font-['Cairo'] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.25] drop-shadow-lg">
                   نصيغ الفراغ.. <br />
-                  <span className="text-[#bf6a33]">لنمنحك قيمة تدوم.</span>
+                  <span className="text-[#0ea5e9]">لنمنحك قيمة تدوم.</span>
                 </h2>
                 <p className="mt-3 sm:mt-5 text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-white/85 drop-shadow-md max-w-sm sm:max-w-lg lg:max-w-2xl ml-auto">
                   في بنغازي، نحن لا نبني جدراناً فقط؛ نحن نصمم استثمارات عقارية مستدامة ونشرف على أدق تفاصيل التنفيذ لنضمن لك جودة تليق بتطلعاتك.
@@ -130,7 +130,7 @@ export default function HomeHeroSection() {
             {/* جهة اليسار: مسار العمل — يظهر فقط في الويب ومتموضع لليسار */}
             <div className="hidden lg:block absolute left-4 bottom-0 max-w-xs text-right flex-shrink-0">
               <div className="mb-3">
-                <span className="text-[#bf6a33] font-bold tracking-widest uppercase text-xs sm:text-sm drop-shadow">مسار العمل</span>
+                <span className="text-[#0ea5e9] font-bold tracking-widest uppercase text-xs sm:text-sm drop-shadow">مسار العمل</span>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-white mt-1 drop-shadow-lg">من الفكرة إلى الواقع</h3>
               </div>
               <p className="text-white/70 text-xs sm:text-sm mb-4 leading-relaxed drop-shadow">
@@ -140,7 +140,7 @@ export default function HomeHeroSection() {
                 {workflowSteps.map((step) => (
                   <div key={step.id} className="flex items-center justify-end gap-3 group">
                     <span className="text-white/80 text-xs sm:text-sm font-medium group-hover:text-white transition-colors drop-shadow">{step.title}</span>
-                    <span className="text-[#bf6a33] font-black text-base sm:text-lg border-r border-[#bf6a33]/30 pr-3 drop-shadow">{step.id}</span>
+                    <span className="text-[#0ea5e9] font-black text-base sm:text-lg border-r border-[#0ea5e9]/30 pr-3 drop-shadow">{step.id}</span>
                   </div>
                 ))}
               </div>

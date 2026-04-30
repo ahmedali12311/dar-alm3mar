@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { containerClass, pageSectionClass } from "../../../lib/ui"; 
+import { Link } from "react-router-dom"; 
 
 export default function HomeContactSection() {
   return (
@@ -41,7 +42,7 @@ export default function HomeContactSection() {
           initial={{ opacity: 0, width: 0 }}
           whileInView={{ opacity: 1, width: "100px" }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="mb-6 h-px bg-[#915025]"
+          className="mb-6 h-px bg-[#0284c7]"
         />
 
         {/* العنوان الرئيسي */}
@@ -71,9 +72,9 @@ export default function HomeContactSection() {
           transition={{ delay: 0.1, duration: 0.6 }}
           className="mt-16"
         >
-          <a 
-            href="/contact" 
-            className="group relative flex items-center gap-5 border border-[#050a15] bg-[#050a15] px-12 py-6 text-white transition-all duration-300 ease-in-out hover:bg-[#915025] hover:border-[#915025]"
+          <Link 
+            to="/contact" 
+            className="group relative flex items-center gap-5 border border-[#050a15] bg-[#050a15] px-12 py-6 text-white transition-all duration-300 ease-in-out hover:bg-[#0284c7] hover:border-[#0284c7]"
           >
             <span className="font-['Cairo'] text-base font-bold tracking-[0.05em] uppercase">
               طلب استشارة هندسية
@@ -87,7 +88,7 @@ export default function HomeContactSection() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-          </a>
+          </Link>
         </motion.div>
 
       </div>

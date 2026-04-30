@@ -6,14 +6,14 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#FCFBFA] pt-20 pb-10 overflow-hidden">
+    <footer className="relative bg-[#ffffff] pt-20 pb-10 overflow-hidden">
       {/* خط علوي ذهبي */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-px bg-gradient-to-r from-transparent via-[#915025]/30 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-px bg-gradient-to-r from-transparent via-[#0284c7]/30 to-transparent" />
       {/* شبكة هندسية خفيفة */}
       <div
         className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(#915025 1px, transparent 1px), linear-gradient(90deg, #915025 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(#0284c7 1px, transparent 1px), linear-gradient(90deg, #0284c7 1px, transparent 1px)`,
           backgroundSize: "80px 80px",
         }}
       />
@@ -36,8 +36,8 @@ export default function Footer() {
                   دار المعمار
                 </h2>
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-6 bg-[#915025] transition-all duration-500 group-hover:w-10" />
-                  <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#915025]/70">
+                  <span className="h-px w-6 bg-[#0284c7] transition-all duration-500 group-hover:w-10" />
+                  <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#0284c7]/70">
                     Benghazi Office
                   </span>
                 </div>
@@ -60,11 +60,11 @@ export default function Footer() {
                   to={item.to}
                   className={({ isActive }) =>
                     `text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group ${
-                      isActive ? "text-[#915025]" : "text-slate-500 hover:text-slate-900"
+                      isActive ? "text-[#0284c7]" : "text-slate-500 hover:text-slate-900"
                     }`
                   }
                 >
-                  <span className="h-px w-0 bg-[#915025] transition-all duration-300 group-hover:w-3 flex-shrink-0" />
+                  <span className="h-px w-0 bg-[#0284c7] transition-all duration-300 group-hover:w-3 flex-shrink-0" />
                   {item.label}
                 </NavLink>
               ))}
@@ -78,7 +78,7 @@ export default function Footer() {
             </h3>
             <div className="space-y-6">
               <a href="tel:+218913768844" dir="ltr" className="group flex flex-col gap-1">
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#915025]/50 group-hover:text-[#915025] transition-colors">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#0284c7]/50 group-hover:text-[#0284c7] transition-colors">
                   Phone
                 </span>
                 <span className="text-base font-light text-slate-600 group-hover:text-slate-900 transition-colors tracking-wide">
@@ -86,7 +86,7 @@ export default function Footer() {
                 </span>
               </a>
               <a href="mailto:dar.alma3mar@gmail.com" className="group flex flex-col gap-1">
-                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#915025]/50 group-hover:text-[#915025] transition-colors">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#0284c7]/50 group-hover:text-[#0284c7] transition-colors">
                   Email
                 </span>
                 <span className="text-base font-light text-slate-600 group-hover:text-slate-900 transition-colors break-all">
@@ -104,10 +104,10 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-5">
             <span className="h-px w-8 bg-slate-200" />
-            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#915025] transition-colors">
+            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#0284c7] transition-colors">
               Instagram
             </a>
-            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#915025] transition-colors">
+            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#0284c7] transition-colors">
               Facebook
             </a>
           </div>
@@ -116,7 +116,7 @@ export default function Footer() {
 
       {/* Geometric Accent */}
       <div className="absolute left-[-2%] bottom-[-6%] opacity-[0.025] pointer-events-none select-none">
-        <span className="text-[22vw] font-black leading-none text-[#915025]">DAR</span>
+        <span className="text-[22vw] font-black leading-none text-[#0284c7]">DAR</span>
       </div>
     </footer>
   );

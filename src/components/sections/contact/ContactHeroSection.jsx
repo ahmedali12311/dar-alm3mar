@@ -17,7 +17,7 @@ export default function ContactHeroSection() {
       <div className={`${containerClass} relative z-10 grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] items-center gap-12 md:gap-16`}>
 
         {/* 1. Hero Text Side */}
-        <div className="relative z-20 w-full p-6 md:p-10 border-r-8 border-[#915025] text-right">
+        <div className="relative z-20 w-full p-6 md:p-10 border-r-8 border-[#0284c7] text-right">
           <h1 className='text-6xl sm:text-7xl lg:text-[8.5rem] font-black uppercase leading-[0.8] text-slate-950 tracking-tighter font-["Cairo"]'>
             تواصل
           </h1>

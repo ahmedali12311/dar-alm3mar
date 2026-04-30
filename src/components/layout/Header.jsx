@@ -43,7 +43,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between px-6 lg:px-10">
           <div className="flex items-center gap-6">
             <Link
-              className="hidden h-10 items-center justify-center bg-[#102933] px-7 text-[12px] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#915025] active:scale-95 md:inline-flex"
+              className="hidden h-10 items-center justify-center bg-[#0f172a] px-7 text-[12px] font-bold uppercase tracking-widest text-white transition-all hover:bg-[#0284c7] active:scale-95 md:inline-flex"
               to="/contact"
             >
               ابدأ مشروعك
@@ -87,7 +87,7 @@ export default function Header() {
                   className={({ isActive }) =>
                     `relative px-5 py-2 text-[13.5px] font-bold tracking-tight transition-all ${
                       isActive 
-                        ? "text-[#915025]" 
+                        ? "text-[#0284c7]" 
                         : (location.pathname === "/" && !scrolled) 
                           ? "text-slate-800 hover:text-black" 
                           : "text-slate-500 hover:text-slate-900"
@@ -96,7 +96,7 @@ export default function Header() {
                 >
                   {item.label}
                   <span
-                    className={`absolute bottom-0 left-5 right-5 h-[2px] origin-right bg-[#915025] transition-transform duration-500 ${
+                    className={`absolute bottom-0 left-5 right-5 h-[2px] origin-right bg-[#0284c7] transition-transform duration-500 ${
                       location.pathname === item.to ? "scale-x-100" : "scale-x-0"
                     }`}
                   />
@@ -110,9 +110,9 @@ export default function Header() {
             to="/"
             aria-label="العودة إلى الصفحة الرئيسية"
           >
-            <span className="flex flex-col items-end border-r-2 border-slate-900 pr-4 text-right transition-all duration-500 group-hover:border-[#915025]">
+            <span className="flex flex-col items-end border-r-2 border-slate-900 pr-4 text-right transition-all duration-500 group-hover:border-[#0284c7]">
               <strong className="font-['Cairo'] text-xl font-black leading-none tracking-tight text-slate-900 lg:text-2xl">
-                دار المعمار<span className="text-[#915025]">.</span>
+                دار المعمار<span className="text-[#0284c7]">.</span>
               </strong>
               <small className="mt-1.5 block max-w-[132px] text-[8px] leading-tight tracking-[0.22em] text-slate-400 uppercase sm:max-w-none sm:text-[9px] sm:tracking-[0.35em]">
                 Engineering Bureau
@@ -134,14 +134,14 @@ export default function Header() {
                 key={item.to}
                 to={item.to}
                 end={item.to === "/"}
-                className="border-b border-slate-50 px-10 py-5 text-center text-[14px] font-black tracking-[0.15em] text-slate-700 transition-colors last:border-none hover:bg-slate-50 hover:text-[#915025]"
+                className="border-b border-slate-50 px-10 py-5 text-center text-[14px] font-black tracking-[0.15em] text-slate-700 transition-colors last:border-none hover:bg-slate-50 hover:text-[#0284c7]"
               >
                 {item.label}
               </NavLink>
             ))}
             <div className="p-6">
               <Link
-                className="flex h-14 items-center justify-center bg-[#102933] text-[13px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#915025]"
+                className="flex h-14 items-center justify-center bg-[#0f172a] text-[13px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#0284c7]"
                 to="/contact"
               >
                 ابدأ مشروعك الآن

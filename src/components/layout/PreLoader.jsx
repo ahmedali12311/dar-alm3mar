@@ -28,12 +28,12 @@ export default function PreLoader() {
         </div>
 
         <div className="mt-16 flex w-full max-w-72 flex-col items-center gap-4 sm:mt-20 md:mt-24">
-          <span className="text-center text-[0.72rem] font-semibold uppercase tracking-[0.55em] text-[#915025] sm:text-sm sm:tracking-[0.8em]">
+          <span className="text-center text-[0.72rem] font-semibold uppercase tracking-[0.55em] text-[#0284c7] sm:text-sm sm:tracking-[0.8em]">
             Loading
           </span>
-          <div className="relative h-[1px] w-full overflow-hidden bg-[#915025]/10">
+          <div className="relative h-[1px] w-full overflow-hidden bg-[#0284c7]/10">
             <motion.div 
-              className="absolute h-full bg-[#915025] w-full"
+              className="absolute h-full bg-[#0284c7] w-full"
               initial={{ x: '-100%' }}
               animate={{ x: '100%' }}
               transition={{ 

@@ -2,6 +2,7 @@ import { processSteps } from "../../../site-data";
 import { containerClass } from "../../../lib/ui";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProjectsProcessSection() {
   const containerRef = useRef(null);
@@ -12,10 +13,10 @@ export default function ProjectsProcessSection() {
 
   // Color palette for the gradient progression
   const stepColors = [
-    { from: "#D4A373", to: "#915025" }, 
-    { from: "#BC6C25", to: "#915025" }, 
-    { from: "#915025", to: "#603813" }, 
-    { from: "#102933", to: "#08161d" }, 
+    { from: "#38bdf8", to: "#0284c7" }, 
+    { from: "#0ea5e9", to: "#0284c7" }, 
+    { from: "#0284c7", to: "#0369a1" }, 
+    { from: "#0f172a", to: "#020617" }, 
   ];
 
   return (
@@ -45,9 +46,9 @@ export default function ProjectsProcessSection() {
             <motion.span 
               animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="h-1.5 w-1.5 rounded-full bg-[#915025]" 
+              className="h-1.5 w-1.5 rounded-full bg-[#0284c7]" 
             />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#915025]">
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#0284c7]">
               منهجية العمل الاحترافية
             </span>
           </motion.div>
@@ -57,13 +58,13 @@ export default function ProjectsProcessSection() {
             transition={{ duration: 0.8 }}
             className="font-['Cairo'] text-4xl font-black leading-tight text-slate-900 md:text-6xl mb-6"
           >
-            مسارنا نحو <span className="text-[#915025]">الكمال</span> المعماري
+            مسارنا نحو <span className="text-[#0284c7]">الكمال</span> المعماري
           </motion.h2>
           <motion.div 
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="h-1.5 bg-gradient-to-r from-transparent via-[#915025] to-transparent mx-auto rounded-full" 
+            className="h-1.5 bg-gradient-to-r from-transparent via-[#0284c7] to-transparent mx-auto rounded-full" 
           />
         </div>
 
@@ -86,7 +87,7 @@ export default function ProjectsProcessSection() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-                  className="relative z-10 h-full p-12 rounded-[3.5rem] bg-white border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] transition-all duration-700 group-hover:shadow-[0_40px_80px_rgba(145,80,37,0.15)] group-hover:-translate-y-6 flex flex-col items-center text-center"
+                  className="relative z-10 h-full p-12 rounded-[3.5rem] bg-white border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.03)] transition-all duration-700 group-hover:shadow-[0_40px_80px_rgba(2, 132, 199,0.15)] group-hover:-translate-y-6 flex flex-col items-center text-center"
                 >
                   
                   {/* Interactive Step Number */}
@@ -107,11 +108,11 @@ export default function ProjectsProcessSection() {
                     <motion.div 
                       animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.2, 1] }}
                       transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute -inset-2 rounded-[2.5rem] bg-[#915025]/5 blur-lg -z-10" 
+                      className="absolute -inset-2 rounded-[2.5rem] bg-[#0284c7]/5 blur-lg -z-10" 
                     />
                   </motion.div>
 
-                  <h3 className="font-['Cairo'] text-2xl font-bold text-slate-900 mb-5 group-hover:text-[#915025] transition-colors duration-300">
+                  <h3 className="font-['Cairo'] text-2xl font-bold text-slate-900 mb-5 group-hover:text-[#0284c7] transition-colors duration-300">
                     {step.title}
                   </h3>
                   
@@ -142,55 +143,68 @@ export default function ProjectsProcessSection() {
 
         {/* Dynamic CTA Banner */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mt-48 relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, type: "spring", bounce: 0.4 }}
+          className="mt-40 relative group"
         >
-           <div className="absolute inset-0 bg-[#102933] rounded-[4rem] shadow-2xl overflow-hidden">
-              {/* Animated background patterns */}
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-1/2 -right-1/2 w-full h-full border-[1px] border-white/5 rounded-full"
+           <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#020617] to-[#0f172a] rounded-[3rem] overflow-hidden border border-white/5 shadow-[0_20px_80px_rgba(2,132,199,0.15)]">
+              
+              {/* Architectural Grid Background */}
+              <div 
+                className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)`,
+                  backgroundSize: "40px 40px",
+                }}
               />
-              <motion.div 
-                animate={{ rotate: -360 }}
-                transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-1/2 -left-1/2 w-full h-full border-[1px] border-white/5 rounded-full"
+
+              {/* Glowing Accent Orbs */}
+              <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#0284c7] rounded-full mix-blend-screen filter blur-[100px] opacity-20 transition-opacity duration-700 group-hover:opacity-40" />
+              <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#0ea5e9] rounded-full mix-blend-screen filter blur-[100px] opacity-10 transition-opacity duration-700 group-hover:opacity-30" />
+
+              {/* Animated Light Sweep */}
+              <motion.div
+                initial={{ left: "-100%" }}
+                whileInView={{ left: "200%" }}
+                transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: "easeInOut" }}
+                className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
               />
            </div>
 
-           <div className="relative z-10 p-12 md:p-24 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-right">
-              <div className="max-w-xl">
+           <div className="relative z-10 p-10 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-right">
+              <div className="max-w-2xl relative">
+                <div className="absolute -right-6 top-0 w-1.5 h-20 bg-gradient-to-b from-[#0ea5e9] to-transparent rounded-full hidden md:block" />
+                <span className="inline-block py-1.5 px-4 rounded-full bg-[#0284c7]/20 border border-[#0284c7]/30 text-[#0ea5e9] text-[10px] font-black uppercase tracking-[0.4em] mb-6">
+                  ابدأ مشروعك الآن
+                </span>
                 <motion.h4 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  className="font-['Cairo'] text-3xl font-black text-white mb-6 md:text-5xl"
+                  className="font-['Cairo'] text-4xl font-black text-white mb-6 md:text-5xl leading-tight"
                 >
-                  مستعد لنقل فكرتك <br/>إلى المرحلة التالية؟
+                  مستعد لنقل فكرتك <br/>
+                  إلى <span className="text-transparent bg-clip-text bg-gradient-to-l from-[#0284c7] to-[#0ea5e9]">المرحلة التالية؟</span>
                 </motion.h4>
-                <p className="text-slate-400 text-lg leading-relaxed">نحن نؤمن بأن كل مشروع هو فرصة لخلق شيء استثنائي.</p>
+                <p className="text-slate-400 text-lg md:text-xl font-light leading-relaxed max-w-xl">
+                  نحن نؤمن بأن كل مشروع هو فرصة لخلق شيء استثنائي. دعنا نحوّل رؤيتك إلى واقع ملموس يتجاوز التوقعات.
+                </p>
               </div>
 
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05, x: -5 }}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative inline-flex items-center gap-8 bg-gradient-to-r from-[#915025] to-[#bf6a33] px-14 py-7 rounded-3xl text-white font-black text-xl shadow-[0_20px_50px_rgba(145,80,37,0.3)] transition-all overflow-hidden"
+                className="inline-block"
               >
-                {/* Shine effect on hover */}
-                <motion.div 
-                  initial={{ left: "-100%" }}
-                  whileHover={{ left: "100%" }}
-                  transition={{ duration: 0.8 }}
-                  className="absolute top-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-                />
-                <span className="font-['Cairo'] relative z-10">طلب استشارة مجانية</span>
-                <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md transition-all group-hover:bg-white group-hover:text-[#915025]">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                </div>
-              </motion.a>
+                <Link
+                  to="/contact"
+                  className="group relative inline-flex items-center gap-6 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#0284c7]/50 backdrop-blur-xl px-10 py-6 rounded-2xl text-white font-bold text-lg shadow-[0_10px_30px_rgba(0,0,0,0.2)] transition-all overflow-hidden"
+                >
+                  <span className="font-['Cairo'] relative z-10 tracking-wide">طلب استشارة مجانية</span>
+                  <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-[#0284c7] to-[#0ea5e9] shadow-[0_0_20px_rgba(2,132,199,0.5)] transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                  </div>
+                </Link>
+              </motion.div>
            </div>
         </motion.div>
       </div>
