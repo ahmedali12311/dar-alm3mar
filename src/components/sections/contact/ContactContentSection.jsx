@@ -1,126 +1,109 @@
 import { contactMethods } from "../../../site-data";
-import {
-  buttonPrimaryClass,
-  containerClass,
-  eyebrowClass,
-  glassCardClass,
-  pageSectionClass,
-  paragraphClass,
-  sectionHeadingClass,
-} from "../../../lib/ui";
+import { containerClass } from "../../../lib/ui";
 
-const inputClass =
-  "w-full rounded-2xl border border-slate-300 bg-white/85 px-4 py-3 text-slate-900 outline-none transition focus:border-[#bf6a33]/50 focus:ring-4 focus:ring-[#bf6a33]/10";
+const icons = {
+  الهاتف: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+      <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.04 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z" />
+    </svg>
+  ),
+  "البريد الإلكتروني": (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="M2 7l10 7 10-7" />
+    </svg>
+  ),
+  فيسبوك: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+    </svg>
+  ),
+  الموقع: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  ),
+};
 
 export default function ContactContentSection() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") || "").trim();
-    const phone = String(formData.get("phone") || "").trim();
-    const service = String(formData.get("service") || "").trim();
-    const message = String(formData.get("message") || "").trim();
-
-    const subject = encodeURIComponent(`طلب جديد من الموقع - ${service}`);
-    const body = encodeURIComponent(
-      [
-        "السلام عليكم،",
-        "",
-        `الاسم: ${name}`,
-        `الهاتف: ${phone}`,
-        `الخدمة المطلوبة: ${service}`,
-        "",
-        "تفاصيل الطلب:",
-        message,
-      ].join("\n")
-    );
-
-    window.location.href = `mailto:dar.alma3mar@gmail.com?subject=${subject}&body=${body}`;
-  };
-
   return (
-    <section className={pageSectionClass}>
-      <div className={`${containerClass} grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(340px,0.95fr)]`}>
-        <div className={`${glassCardClass} p-7`}>
-          <div className="mb-6 max-w-2xl">
-            <span className={eyebrowClass}>بيانات الشركة</span>
-            <h2 className={`mt-4 ${sectionHeadingClass}`}>طرق الوصول إلى دار المعمار</h2>
-            <p className={`mt-3 ${paragraphClass}`}>
-              اختر وسيلة التواصل الأنسب لك، وسنكون سعداء بمناقشة المتطلبات
-              الفنية أو العقارية لمشروعك.
-            </p>
-          </div>
+    <section className="relative bg-white">
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {contactMethods.map((item) => (
-              <a
-                className="flex min-h-36 flex-col gap-2 rounded-[24px] border border-slate-200 bg-white/80 p-6 shadow-[0_16px_34px_rgba(12,18,24,0.08)] transition hover:-translate-y-1 hover:border-[#bf6a33]/30"
-                key={item.label}
-                href={item.href}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noreferrer" : undefined}
-              >
-                <span className="text-sm text-slate-500">{item.label}</span>
-                <strong className="text-base font-bold leading-7 text-slate-900">
-                  {item.value}
-                </strong>
-              </a>
-            ))}
-          </div>
+      <div className={`${containerClass} py-24 md:py-36`}>
+
+        {/* ── Section header ── */}
+        <div className="flex flex-col items-start text-right mb-20" dir="rtl">
+          <span className="text-[11px] font-mono tracking-[0.35em] uppercase text-[#0e7490] mb-4">
+            طرق التواصل
+          </span>
+          <h2 className='text-5xl md:text-6xl font-black text-slate-950 leading-[0.85] tracking-tighter font-["Cairo"]'>
+            ابدأ المحادثة
+          </h2>
+          <div className="mt-5 w-16 h-[2px] bg-[#0e7490]" />
         </div>
 
-        <div className={`${glassCardClass} p-7`}>
-          <form className="grid gap-4" onSubmit={handleSubmit}>
-            <div className="mb-1">
-              <span className={eyebrowClass}>أرسل رسالة</span>
-              <h2 className={`mt-4 ${sectionHeadingClass}`}>نموذج تواصل سريع</h2>
-              <p className={`mt-3 ${paragraphClass}`}>
-                هذا النموذج يجهز رسالة بريد إلكتروني مباشرة إلى الشركة بالبيانات
-                التي تكتبها.
-              </p>
+        {/* ── Cards grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6" dir="rtl">
+          {contactMethods.map((method, idx) => (
+            <a
+              key={method.label}
+              href={method.href}
+              target={method.external ? "_blank" : undefined}
+              rel={method.external ? "noopener noreferrer" : undefined}
+              className="group relative bg-white border border-slate-100 overflow-hidden flex flex-col p-8 gap-8 transition-shadow duration-400 hover:shadow-[0_8px_40px_rgba(14,116,144,0.10)] hover:border-[#0e7490]/30"
+              style={{ minHeight: "260px" }}
+            >
+              {/* Animated bottom border — grows on hover */}
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0e7490] scale-x-0 group-hover:scale-x-100 origin-right transition-transform duration-500 ease-out" />
+
+
+              {/* Icon — stays teal always, grows on hover */}
+              <div className="relative z-10 w-10 h-10 text-[#0e7490] transition-transform duration-300 group-hover:scale-110">
+                {icons[method.label]}
+              </div>
+
+              {/* Content — text stays DARK always */}
+              <div className="relative z-10 flex-1 flex flex-col justify-end gap-3">
+                <p className="text-[10px] font-mono tracking-[0.3em] uppercase text-slate-400">
+                  {method.label}
+                </p>
+                <p
+                  className="text-slate-900 font-bold text-lg leading-snug break-all transition-colors duration-300 group-hover:text-[#0e7490]"
+                  dir={method.label === "الهاتف" || method.label === "البريد الإلكتروني" ? "ltr" : "rtl"}
+                  style={{ textAlign: "right" }}
+                >
+                  {method.value}
+                </p>
+              </div>
+
+              {/* Arrow — appears on hover */}
+              <div className="relative z-10 flex justify-start">
+                <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center transition-all duration-300 group-hover:border-[#0e7490] group-hover:bg-[#0e7490] group-hover:scale-105">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                    className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors duration-300 rotate-180">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* ── Divider + bottom strip ── */}
+        <div className="mt-16 pt-10 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6" dir="rtl">
+          <div className="flex items-center gap-4">
+            <div className="w-2 h-2 rounded-full bg-[#0e7490] animate-pulse" />
+            <div>
+              <p className="text-[10px] font-mono tracking-widest uppercase text-slate-400 mb-0.5">المقر الرئيسي</p>
+              <p className="text-slate-800 font-bold font-['Cairo'] text-sm">بنغازي — شارع دبي</p>
             </div>
-
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-800">الاسم</span>
-              <input className={inputClass} type="text" name="name" placeholder="اكتب اسمك" required />
-            </label>
-
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-800">رقم الهاتف</span>
-              <input className={inputClass} type="tel" name="phone" placeholder="مثال: +218 ..." required />
-            </label>
-
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-800">نوع الخدمة</span>
-              <select className={inputClass} name="service" defaultValue="استشارة هندسية">
-                <option value="استشارة هندسية">استشارة هندسية</option>
-                <option value="تصميم معماري">تصميم معماري</option>
-                <option value="تنفيذ وإشراف">تنفيذ وإشراف</option>
-                <option value="استثمار عقاري">استثمار عقاري</option>
-              </select>
-            </label>
-
-            <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-800">تفاصيل الطلب</span>
-              <textarea
-                className={`${inputClass} min-h-40 resize-y`}
-                name="message"
-                rows="6"
-                placeholder="اكتب تفاصيل مشروعك أو استفسارك"
-                required
-              ></textarea>
-            </label>
-
-            <button className={buttonPrimaryClass} type="submit">
-              تجهيز الرسالة
-            </button>
-
-            <p className="text-sm leading-7 text-slate-500">
-              بعد الضغط سيتم فتح برنامج البريد الافتراضي لديك برسالة جاهزة.
-            </p>
-          </form>
+          </div>
+          <p className="text-[11px] font-mono tracking-wider text-slate-300">
+            دار المعمار للاستشارات والأعمال الهندسية
+          </p>
         </div>
+
       </div>
     </section>
   );

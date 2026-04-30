@@ -1,78 +1,122 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { footerCopy, navLinks } from "../../site-data";
 import { containerClass } from "../../lib/ui";
 
 export default function Footer() {
-  const location = useLocation();
   const year = new Date().getFullYear();
-  const copy = footerCopy[location.pathname] || footerCopy["/"];
 
   return (
-    <footer className="mt-6 border-t border-slate-900/10 bg-gradient-to-b from-white/55 to-[#ece3d6]/80 py-10 md:py-12">
-      <div className={`${containerClass} grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.72fr)_minmax(0,0.72fr)]`}>
-        <div>
-          <NavLink className="mb-4 inline-flex items-center gap-3" to="/">
-            <span className="grid h-13 w-13 place-items-center rounded-[18px] bg-gradient-to-br from-[#bf6a33] to-[#102933] font-['Cairo'] text-lg font-extrabold tracking-[0.08em] text-[#fff7ef] shadow-[0_14px_28px_rgba(16,41,51,0.16)]">
-              DM
-            </span>
-            <span className="flex flex-col leading-tight">
-              <strong className="font-['Cairo'] text-base font-extrabold text-slate-900">
-                دار المعمار
-              </strong>
-              <small className="text-xs text-slate-500">
-                الاستشارات الهندسية والاستثمار العقاري
-              </small>
-            </span>
-          </NavLink>
-          <p className="max-w-xl text-sm leading-8 text-slate-500">{copy}</p>
-        </div>
+    <footer className="relative bg-[#FCFBFA] pt-20 pb-10 overflow-hidden">
+      {/* خط علوي ذهبي */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-px bg-gradient-to-r from-transparent via-[#915025]/30 to-transparent" />
+      {/* شبكة هندسية خفيفة */}
+      <div
+        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(#915025 1px, transparent 1px), linear-gradient(90deg, #915025 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
 
-        <div>
-          <h3 className="font-['Cairo'] text-xl font-bold text-slate-900">روابط سريعة</h3>
-          <div className="mt-4 grid gap-3">
-            {navLinks.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/"}
-                className="text-sm text-slate-500 transition hover:text-[#915025]"
-              >
-                {item.label}
-              </NavLink>
-            ))}
+      <div className={`${containerClass} relative z-10`}>
+        <div className="grid gap-14 lg:grid-cols-[2fr_1fr_1.2fr]">
+
+          {/* Brand */}
+          <div className="flex flex-col items-start gap-8 border-r border-slate-100 pr-8 md:pr-14">
+            <NavLink className="group flex flex-col gap-5" to="/">
+              <div className="h-14 flex items-center overflow-hidden">
+                <img
+                  src="/images/logo.jpg"
+                  alt="Logo"
+                  className="h-full w-auto object-contain object-left transition-all duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <h2 className="font-['Cairo'] text-2xl font-black tracking-tight text-slate-900 leading-none">
+                  دار المعمار
+                </h2>
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-6 bg-[#915025] transition-all duration-500 group-hover:w-10" />
+                  <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#915025]/70">
+                    Benghazi Office
+                  </span>
+                </div>
+              </div>
+            </NavLink>
+            <p className="max-w-xs text-sm leading-[1.9] text-slate-400 font-light italic">
+              {footerCopy?.["/"] || "نصمم استثمارات عقارية مستدامة ونشرف على أدق تفاصيل التنفيذ لنضمن لك جودة تليق بتطلعاتك."}
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex flex-col gap-7">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 border-b border-slate-100 pb-3">
+              الصفحات
+            </h3>
+            <nav className="flex flex-col gap-4">
+              {navLinks.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `text-sm font-medium transition-all duration-300 flex items-center gap-2.5 group ${
+                      isActive ? "text-[#915025]" : "text-slate-500 hover:text-slate-900"
+                    }`
+                  }
+                >
+                  <span className="h-px w-0 bg-[#915025] transition-all duration-300 group-hover:w-3 flex-shrink-0" />
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+
+          {/* Contact */}
+          <div className="flex flex-col gap-7">
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 border-b border-slate-100 pb-3">
+              تواصل
+            </h3>
+            <div className="space-y-6">
+              <a href="tel:+218913768844" dir="ltr" className="group flex flex-col gap-1">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#915025]/50 group-hover:text-[#915025] transition-colors">
+                  Phone
+                </span>
+                <span className="text-base font-light text-slate-600 group-hover:text-slate-900 transition-colors tracking-wide">
+                  +218 91 376 8844
+                </span>
+              </a>
+              <a href="mailto:dar.alma3mar@gmail.com" className="group flex flex-col gap-1">
+                <span className="text-[9px] font-black uppercase tracking-[0.4em] text-[#915025]/50 group-hover:text-[#915025] transition-colors">
+                  Email
+                </span>
+                <span className="text-base font-light text-slate-600 group-hover:text-slate-900 transition-colors break-all">
+                  dar.alma3mar@gmail.com
+                </span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div>
-          <h3 className="font-['Cairo'] text-xl font-bold text-slate-900">بيانات التواصل</h3>
-          <div className="mt-4 grid gap-3">
-            <a
-              href="tel:+218913768844"
-              dir="ltr"
-              className="text-sm text-slate-500 transition hover:text-[#915025]"
-            >
-              +218 91-3768844
+        {/* Bottom Bar */}
+        <div className="mt-16 pt-6 border-t border-slate-100 flex flex-col items-center justify-between gap-5 md:flex-row">
+          <div className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-300">
+            © {year} Dar Al-Me'mar · Architecture & Design
+          </div>
+          <div className="flex items-center gap-5">
+            <span className="h-px w-8 bg-slate-200" />
+            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#915025] transition-colors">
+              Instagram
             </a>
-            <a
-              href="mailto:dar.alma3mar@gmail.com"
-              className="text-sm text-slate-500 transition hover:text-[#915025]"
-            >
-              dar.alma3mar@gmail.com
-            </a>
-            <a
-              href="https://www.bing.com/maps/search?v=2&pc=FACEBK&mid=8100&mkt=en-US&FORM=FBKPL1&q=Dubai+street%2C+Benghazi%2C+Libya"
-              target="_blank"
-              rel="noreferrer"
-              className="text-sm text-slate-500 transition hover:text-[#915025]"
-            >
-              شارع دبي، بنغازي، ليبيا
+            <a href="#" className="text-[9px] font-bold text-slate-300 uppercase tracking-widest hover:text-[#915025] transition-colors">
+              Facebook
             </a>
           </div>
         </div>
       </div>
 
-      <div className={`${containerClass} mt-8 border-t border-slate-900/10 pt-5 text-sm text-slate-500`}>
-        <p>© {year} دار المعمار. جميع الحقوق محفوظة.</p>
+      {/* Geometric Accent */}
+      <div className="absolute left-[-2%] bottom-[-6%] opacity-[0.025] pointer-events-none select-none">
+        <span className="text-[22vw] font-black leading-none text-[#915025]">DAR</span>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 export const containerClass = "mx-auto w-full max-w-[1180px] px-4 sm:px-6";
 
 export const pageSectionClass =
-  "relative isolate flex min-h-screen items-center py-16 sm:py-20";
+  "relative isolate flex min-h-screen items-center bg-white py-16 sm:py-20";
 
 export const glassCardClass =
   "rounded-[28px] border border-white/70 bg-white/75 shadow-[0_20px_60px_rgba(15,23,42,0.12)] backdrop-blur-xl";
