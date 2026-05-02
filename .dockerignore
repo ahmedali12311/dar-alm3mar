@@ -1,0 +1,6 @@
+fly.toml
+.git
+node_modules
+dist
+.vite-dev.log
+.vite-dev.err.log

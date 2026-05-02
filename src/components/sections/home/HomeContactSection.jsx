@@ -1,11 +1,16 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { containerClass, pageSectionClass } from "../../../lib/ui"; 
 import { Link } from "react-router-dom"; 
+import useCompactViewport from "../../../hooks/useCompactViewport";
 
 export default function HomeContactSection() {
+  const reduceMotion = useReducedMotion();
+  const isCompactViewport = useCompactViewport(900);
+  const shouldFloatHelmet = !reduceMotion && !isCompactViewport;
+
   return (
     <section 
-      className={`${pageSectionClass} relative overflow-hidden bg-white py-32 md:py-48 lg:py-56`}
+      className={`${pageSectionClass} content-visibility-auto relative overflow-hidden bg-white py-32 md:py-48 lg:py-56`}
       style={{ backgroundImage: 'radial-gradient(#e2e8f0 1px, transparent 1px)', backgroundSize: '40px 40px' }}
     >
       <div className={`${containerClass} relative z-10 flex flex-col items-center text-center`}>
@@ -18,22 +23,41 @@ export default function HomeContactSection() {
           {/* صورة الخوذة - مكبرة جداً وحركتها عائمة عمودية */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
-            animate={{ 
-              opacity: 1, 
-              y: [-10, -30, -10] 
-            }}
-            transition={{ 
-              delay: 0.2,
-              duration: 1,
-              y: { repeat: Infinity, duration: 3, ease: "easeInOut" }
-            }}
+            animate={
+              shouldFloatHelmet
+                ? {
+                    opacity: 1,
+                    y: [-10, -30, -10],
+                  }
+                : {
+                    opacity: 1,
+                    y: -10,
+                  }
+            }
+            transition={
+              shouldFloatHelmet
+                ? {
+                    delay: 0.2,
+                    duration: 1,
+                    y: { repeat: Infinity, duration: 3, ease: "easeInOut" },
+                  }
+                : {
+                    delay: 0.2,
+                    duration: 0.4,
+                  }
+            }
             className="absolute z-10 w-[100%] md:w-[120%]" 
           >
-            <img 
-              src="public/images/helmet.png" 
-              alt="Safety Helmet" 
-              className="h-auto w-full object-contain drop-shadow-2xl" 
-            />
+            <picture>
+              <source srcSet="/images/helmet.webp" type="image/webp" />
+              <img 
+                src="/images/Helmet.png" 
+                alt="Safety Helmet" 
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-full object-contain drop-shadow-2xl" 
+              />
+            </picture>
           </motion.div>
         </div>
 

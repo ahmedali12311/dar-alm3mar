@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, memo } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { containerClass } from "../../../lib/ui";
 import LuxuryVillaColorSvg from "./LuxuryVillaColorSvg";
 
@@ -9,23 +9,28 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] },
 });
 
-const drawLine = (delay = 0) => ({
-  initial: { pathLength: 0, opacity: 0 },
-  animate: { pathLength: 1, opacity: 1 },
-  transition: { duration: 1.4, delay, ease: [0.22, 1, 0.36, 1] },
-});
-
 export default function ProjectsHeroSection() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const sectionRef = useRef(null);
+  
+  // Use MotionValues for high-performance parallax without re-renders
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Add smoothing
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
 
   const handleMouseMove = (e) => {
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
-    setMouse({
-      x: ((e.clientX - rect.left) / rect.width - 0.5) * 16,
-      y: ((e.clientY - rect.top) / rect.height - 0.5) * 10,
-    });
+    
+    // Calculate normalized position (-0.5 to 0.5)
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    
+    // Update motion values (multiplied by strength)
+    mouseX.set(x * 16);
+    mouseY.set(y * 10);
   };
 
   return (
@@ -98,16 +103,13 @@ export default function ProjectsHeroSection() {
 
         {/* ── DRAWING WRAPPER ── */}
         <div className="relative flex items-center justify-center w-full">
-
           {/* Animated Luxury Villa Watercolor Sketch */}
           <motion.div
             style={{
-              x: mouse.x,
-              y: mouse.y,
+              x: springX,
+              y: springY,
             }}
             className="relative z-30 w-[95vw] max-w-[860px]"
-            animate={{ x: mouse.x, y: mouse.y }}
-            transition={{ type: "spring", stiffness: 60, damping: 20 }}
           >
             <LuxuryVillaColorSvg />
           </motion.div>

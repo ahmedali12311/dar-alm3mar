@@ -1,39 +1,22 @@
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useId, useRef } from "react";
-import useCompactViewport from "../../hooks/useCompactViewport";
+import { lazy, Suspense, useId } from "react";
+import useDeferredMount from "../../hooks/useDeferredMount";
 
+const AnimatedSectionConnector = lazy(() => import("./AnimatedSectionConnector"));
 const WAVE_FILL_PATH =
   "M-60,0 L-60,0 C140,56 360,52 560,28 C740,6 930,6 1120,30 C1260,52 1370,48 1500,34 L1500,140 L-60,140 Z";
 const WAVE_STROKE_PATH =
   "M-60,0 C140,56 360,52 560,28 C740,6 930,6 1120,30 C1260,52 1370,48 1500,34";
 
-export default function SectionConnector({
+function StaticSectionConnector({
   from = "#F8F7F4",
   to = "#F8F7F4",
   accent = "rgba(138,112,96,0.5)",
   heightClass = "h-20 md:h-28",
 }) {
-  const ref = useRef(null);
   const gradientId = useId().replace(/:/g, "");
-  const reduceMotion = useReducedMotion();
-  const isCompactViewport = useCompactViewport();
-  const disableConnectorMotion = reduceMotion || isCompactViewport;
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-
-  // Keep geometry fixed to avoid any visible background gaps.
-  const focusRaw = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const focus = useSpring(focusRaw, { stiffness: 90, damping: 26, mass: 0.45 });
-  const strokeOpacityRaw = useTransform(focus, [0, 1], [0.72, 1]);
-  const strokeWidthRaw = useTransform(focus, [0, 1], [3.1, 4.1]);
-  const glowOpacityRaw = useTransform(focus, [0, 1], [0.38, 0.62]);
-
-  const strokeOpacity = useSpring(strokeOpacityRaw, { stiffness: 95, damping: 28, mass: 0.35 });
-  const strokeWidth = useSpring(strokeWidthRaw, { stiffness: 95, damping: 28, mass: 0.35 });
-  const glowOpacity = useSpring(glowOpacityRaw, { stiffness: 95, damping: 28, mass: 0.35 });
 
   return (
     <div
-      ref={ref}
       aria-hidden="true"
       className={`relative -my-px w-full overflow-hidden ${heightClass}`}
       style={{ background: from }}
@@ -49,38 +32,41 @@ export default function SectionConnector({
         </defs>
 
         <path d={WAVE_FILL_PATH} fill={to} />
-        <motion.path
+        <path
           d={WAVE_STROKE_PATH}
           fill="none"
           stroke={`url(#${gradientId})`}
-          style={
-            disableConnectorMotion
-              ? { opacity: 0.42 }
-              : {
-                  opacity: glowOpacity,
-                }
-          }
-          strokeWidth={10.5}
+          strokeWidth="10.5"
           strokeLinecap="round"
           strokeLinejoin="round"
+          opacity="0.42"
         />
-        <motion.path
+        <path
           d={WAVE_STROKE_PATH}
           fill="none"
           stroke={`url(#${gradientId})`}
-          style={
-            disableConnectorMotion
-              ? { opacity: 0.86 }
-              : {
-                  opacity: strokeOpacity,
-                  strokeWidth,
-                }
-          }
-          strokeWidth={disableConnectorMotion ? 3.4 : undefined}
+          strokeWidth="3.4"
           strokeLinecap="round"
           strokeLinejoin="round"
+          opacity="0.86"
         />
       </svg>
+    </div>
+  );
+}
+
+export default function SectionConnector(props) {
+  const [ref, shouldMount] = useDeferredMount({ rootMargin: "420px 0px", idleTimeout: 1500 });
+
+  return (
+    <div ref={ref}>
+      {shouldMount ? (
+        <Suspense fallback={<StaticSectionConnector {...props} />}>
+          <AnimatedSectionConnector {...props} />
+        </Suspense>
+      ) : (
+        <StaticSectionConnector {...props} />
+      )}
     </div>
   );
 }

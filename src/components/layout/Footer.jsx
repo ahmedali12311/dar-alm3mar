@@ -6,7 +6,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#ffffff] pt-20 pb-10 overflow-hidden">
+    <footer className="content-visibility-auto relative overflow-hidden bg-[#ffffff] pt-20 pb-10">
       {/* خط علوي ذهبي */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50%] h-px bg-gradient-to-r from-transparent via-[#0284c7]/30 to-transparent" />
       {/* شبكة هندسية خفيفة */}
@@ -28,6 +28,8 @@ export default function Footer() {
                 <img
                   src="/images/logo.jpg"
                   alt="Logo"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-auto object-contain object-left transition-all duration-700 group-hover:scale-105"
                 />
               </div>

@@ -25,6 +25,40 @@ const slideX = (delay = 0, x = -20) => ({
   transition: { delay, duration: 0.9, ease: [0.22, 1, 0.36, 1] },
 });
 
+const gleamAnim = (delay = 0) => ({
+  animate: { opacity: [0.2, 1, 0.2] },
+  transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay },
+});
+
+const birdsData = [
+  // Cluster 1 (Main flock, low)
+  { id: 1, scale: 1.0, yOffset: 10, delay: 0, flightDur: 25, flapSpeed: 1.2 },
+  { id: 2, scale: 0.9, yOffset: -30, delay: 1.2, flightDur: 26, flapSpeed: 1.1 },
+  { id: 3, scale: 1.1, yOffset: 45, delay: 2.5, flightDur: 24, flapSpeed: 1.3 },
+  { id: 4, scale: 0.8, yOffset: -50, delay: 4.8, flightDur: 27, flapSpeed: 1.4 },
+  { id: 5, scale: 0.85, yOffset: 75, delay: 6.2, flightDur: 25.5, flapSpeed: 1.2 },
+  
+  // Cluster 2 (High altitude, distant)
+  { id: 6, scale: 0.4, yOffset: -180, delay: 1, flightDur: 35, flapSpeed: 1.8 },
+  { id: 7, scale: 0.45, yOffset: -140, delay: 3.5, flightDur: 34, flapSpeed: 1.7 },
+  { id: 8, scale: 0.35, yOffset: -210, delay: 5.2, flightDur: 36, flapSpeed: 1.9 },
+  { id: 9, scale: 0.5, yOffset: -110, delay: 8.8, flightDur: 33, flapSpeed: 1.6 },
+  
+  // Cluster 3 (Mid altitude, scattered, fast)
+  { id: 10, scale: 0.6, yOffset: -80, delay: 2.0, flightDur: 20, flapSpeed: 1.0 },
+  { id: 11, scale: 0.65, yOffset: -25, delay: 4.3, flightDur: 21, flapSpeed: 1.1 },
+  { id: 12, scale: 0.55, yOffset: -115, delay: 6.5, flightDur: 19, flapSpeed: 0.9 },
+  { id: 13, scale: 0.7, yOffset: 5, delay: 9.1, flightDur: 22, flapSpeed: 1.2 },
+  
+  // Stragglers
+  { id: 14, scale: 0.9, yOffset: 95, delay: 11, flightDur: 28, flapSpeed: 1.3 },
+  { id: 15, scale: 0.5, yOffset: -160, delay: 14, flightDur: 30, flapSpeed: 1.5 },
+  { id: 16, scale: 0.75, yOffset: -40, delay: 17, flightDur: 24, flapSpeed: 1.2 },
+  { id: 17, scale: 0.85, yOffset: 60, delay: 20, flightDur: 26, flapSpeed: 1.1 },
+  { id: 18, scale: 0.4, yOffset: -240, delay: 12, flightDur: 38, flapSpeed: 2.0 },
+  { id: 19, scale: 0.6, yOffset: -75, delay: 22, flightDur: 21, flapSpeed: 1.0 },
+];
+
 export default function LuxuryVillaColorSvg() {
   return (
     <motion.svg
@@ -67,7 +101,7 @@ export default function LuxuryVillaColorSvg() {
       {/* ══════════════════════════════════════
           LEFT WING — single storey, elegant
          ══════════════════════════════════════ */}
-      <motion.g {...slideX(0.45, -28)}>
+      <motion.g {...rise(0.4, "170px 360px")}>
         {/* Main wall body */}
         <rect x="60" y="246" width="228" height="114" fill="white" stroke="#111" strokeWidth="1.7" />
         {/* Shadow on right edge */}
@@ -91,73 +125,38 @@ export default function LuxuryVillaColorSvg() {
         {/* Horizontal transom */}
         <line x1="146" y1="302" x2="252" y2="302" stroke="#111" strokeWidth="0.7" opacity="0.5" />
         {/* Highlight sheen */}
-        <line x1="153" y1="255" x2="188" y2="282" stroke="white" strokeWidth="2" opacity="0.7" />
+        <motion.line x1="153" y1="255" x2="188" y2="282" stroke="white" strokeWidth="2" {...gleamAnim(0.2)} />
 
         {/* ── Narrow accent window right ── */}
         <rect x="264" y="262" width="52" height="72" fill="url(#glass)" stroke="#111" strokeWidth="1.2" />
         <line x1="290" y1="262" x2="290" y2="334" stroke="#111" strokeWidth="0.7" />
-        <line x1="268" y1="265" x2="285" y2="277" stroke="white" strokeWidth="1.5" opacity="0.6" />
+        <motion.line x1="268" y1="265" x2="285" y2="277" stroke="white" strokeWidth="1.5" {...gleamAnim(0.4)} />
       </motion.g>
 
       {/* ══════════════════════════════════════
-          MAIN TOWER — two storeys, hero volume
+          MAIN TOWER — built floor by floor!
          ══════════════════════════════════════ */}
-      <motion.g {...rise(0.2, "500px 360px")}>
-        {/* Main body */}
-        <rect x="288" y="78" width="424" height="282" fill="white" stroke="#111" strokeWidth="2.2" />
-
-        {/* Roof parapet — thicker cap */}
-        <rect x="270" y="54" width="460" height="26" fill="#dcdcdc" stroke="#111" strokeWidth="1.8" />
-        {/* Parapet top cap line */}
-        <line x1="270" y1="54" x2="730" y2="54" stroke="#111" strokeWidth="0.8" opacity="0.45" />
-        {/* Parapet bottom shadow */}
-        <rect x="270" y="78" width="460" height="6" fill="url(#hatch)" opacity="0.18" />
-
-        {/* Floor divider — inter-storey slab */}
-        <rect x="288" y="222" width="424" height="8" fill="#e0e0e0" stroke="#111" strokeWidth="1" />
-
-        {/* ── UPPER FLOOR — full panoramic glazing ── */}
-        <rect x="300" y="88" width="400" height="124" fill="url(#glass)" stroke="#111" strokeWidth="1.6" />
-        {/* Vertical mullions */}
-        {[375, 450, 525, 600, 675].map(x => (
-          <line key={x} x1={x} y1="88" x2={x} y2="212" stroke="#111" strokeWidth="0.9" opacity="0.5" />
-        ))}
-        {/* Horizontal bar mid */}
-        <line x1="300" y1="150" x2="700" y2="150" stroke="#111" strokeWidth="0.8" opacity="0.35" />
-        {/* Sheen highlights */}
-        <line x1="308" y1="92" x2="360" y2="126" stroke="white" strokeWidth="2.5" opacity="0.7" />
-        <line x1="460" y1="92" x2="510" y2="122" stroke="white" strokeWidth="2" opacity="0.55" />
-        <line x1="614" y1="92" x2="658" y2="118" stroke="white" strokeWidth="2" opacity="0.5" />
-
-        {/* ── BALCONY RAIL at floor slab ── */}
-        <line x1="288" y1="214" x2="712" y2="214" stroke="#111" strokeWidth="2" />
-        {/* Rail posts */}
-        {Array.from({ length: 36 }, (_, i) => 300 + i * 12).map(x => (
-          <line key={x} x1={x} y1="213" x2={x} y2="222" stroke="#111" strokeWidth="0.7" opacity="0.5" />
-        ))}
+         
+      {/* ── GROUND FLOOR TOWER ── */}
+      <motion.g {...rise(0.6, "500px 360px")}>
+        {/* Ground Floor Body */}
+        <rect x="288" y="222" width="424" height="138" fill="white" stroke="#111" strokeWidth="2.2" />
 
         {/* ── GROUND FLOOR: Grand pivot entrance ── */}
-        {/* Entrance recess shadow */}
         <rect x="416" y="234" width="168" height="126" fill="#f0f0f0" stroke="#111" strokeWidth="1.8" />
-        {/* Door panels */}
         <line x1="500" y1="234" x2="500" y2="360" stroke="#111" strokeWidth="1.1" />
-        {/* Transom window */}
         <rect x="416" y="234" width="168" height="32" fill="url(#glass)" stroke="#111" strokeWidth="1" />
         {[449, 500, 551].map(x => (
           <line key={x} x1={x} y1="234" x2={x} y2="266" stroke="#111" strokeWidth="0.7" opacity="0.5" />
         ))}
-        {/* Door panel texture */}
         <rect x="422" y="270" width="70" height="82" rx="1" fill="#e8e8e8" stroke="#111" strokeWidth="0.8" />
         <rect x="508" y="270" width="70" height="82" rx="1" fill="#e8e8e8" stroke="#111" strokeWidth="0.8" />
-        {/* Handles */}
         <line x1="472" y1="304" x2="472" y2="322" stroke="#111" strokeWidth="3" strokeLinecap="round" />
         <line x1="528" y1="304" x2="528" y2="322" stroke="#111" strokeWidth="3" strokeLinecap="round" />
-        {/* Door sill */}
         <rect x="406" y="357" width="188" height="7" rx="1" fill="#d8d8d8" stroke="#111" strokeWidth="1.2" />
 
         {/* ── Canopy above entrance ── */}
         <rect x="400" y="218" width="200" height="18" fill="#d8d8d8" stroke="#111" strokeWidth="1.4" />
-        {/* Canopy supports */}
         <line x1="426" y1="236" x2="426" y2="234" stroke="#111" strokeWidth="1" />
         <line x1="574" y1="236" x2="574" y2="234" stroke="#111" strokeWidth="1" />
 
@@ -165,19 +164,52 @@ export default function LuxuryVillaColorSvg() {
         <rect x="296" y="236" width="110" height="118" fill="url(#glass)" stroke="#111" strokeWidth="1.4" />
         <line x1="351" y1="236" x2="351" y2="354" stroke="#111" strokeWidth="0.9" />
         <line x1="296" y1="295" x2="406" y2="295" stroke="#111" strokeWidth="0.7" opacity="0.4" />
-        <line x1="303" y1="240" x2="342" y2="266" stroke="white" strokeWidth="2" opacity="0.65" />
+        <motion.line x1="303" y1="240" x2="342" y2="266" stroke="white" strokeWidth="2" {...gleamAnim(0.3)} />
 
         {/* ── GROUND FLOOR: Right large glazing ── */}
         <rect x="594" y="236" width="110" height="118" fill="url(#glass)" stroke="#111" strokeWidth="1.4" />
         <line x1="649" y1="236" x2="649" y2="354" stroke="#111" strokeWidth="0.9" />
         <line x1="594" y1="295" x2="704" y2="295" stroke="#111" strokeWidth="0.7" opacity="0.4" />
-        <line x1="601" y1="240" x2="640" y2="266" stroke="white" strokeWidth="2" opacity="0.65" />
+        <motion.line x1="601" y1="240" x2="640" y2="266" stroke="white" strokeWidth="2" {...gleamAnim(0.8)} />
+      </motion.g>
+
+      {/* ── FIRST FLOOR TOWER ── */}
+      <motion.g {...rise(1.3, "500px 222px")}>
+        {/* First Floor Body */}
+        <rect x="288" y="78" width="424" height="144" fill="white" stroke="#111" strokeWidth="2.2" />
+
+        {/* Floor divider — inter-storey slab */}
+        <rect x="288" y="222" width="424" height="8" fill="#e0e0e0" stroke="#111" strokeWidth="1" />
+
+        {/* ── UPPER FLOOR — full panoramic glazing ── */}
+        <rect x="300" y="88" width="400" height="124" fill="url(#glass)" stroke="#111" strokeWidth="1.6" />
+        {[375, 450, 525, 600, 675].map(x => (
+          <line key={x} x1={x} y1="88" x2={x} y2="212" stroke="#111" strokeWidth="0.9" opacity="0.5" />
+        ))}
+        <line x1="300" y1="150" x2="700" y2="150" stroke="#111" strokeWidth="0.8" opacity="0.35" />
+        <motion.line x1="308" y1="92" x2="360" y2="126" stroke="white" strokeWidth="2.5" {...gleamAnim(0)} />
+        <motion.line x1="460" y1="92" x2="510" y2="122" stroke="white" strokeWidth="2" {...gleamAnim(0.5)} />
+        <motion.line x1="614" y1="92" x2="658" y2="118" stroke="white" strokeWidth="2" {...gleamAnim(1.0)} />
+
+        {/* ── BALCONY RAIL at floor slab ── */}
+        <line x1="288" y1="214" x2="712" y2="214" stroke="#111" strokeWidth="2" />
+        {Array.from({ length: 36 }, (_, i) => 300 + i * 12).map(x => (
+          <line key={x} x1={x} y1="213" x2={x} y2="222" stroke="#111" strokeWidth="0.7" opacity="0.5" />
+        ))}
+      </motion.g>
+
+      {/* ── ROOF TOWER ── */}
+      <motion.g {...rise(2.0, "500px 78px")}>
+        {/* Roof parapet — thicker cap */}
+        <rect x="270" y="54" width="460" height="26" fill="#dcdcdc" stroke="#111" strokeWidth="1.8" />
+        <line x1="270" y1="54" x2="730" y2="54" stroke="#111" strokeWidth="0.8" opacity="0.45" />
+        <rect x="270" y="78" width="460" height="6" fill="url(#hatch)" opacity="0.18" />
       </motion.g>
 
       {/* ══════════════════════════════════════
           RIGHT WING — single storey
          ══════════════════════════════════════ */}
-      <motion.g {...slideX(0.5, 28)}>
+      <motion.g {...rise(0.8, "820px 360px")}>
         {/* Wall body */}
         <rect x="712" y="206" width="228" height="154" fill="white" stroke="#111" strokeWidth="1.7" />
         {/* Left shadow edge */}
@@ -193,12 +225,12 @@ export default function LuxuryVillaColorSvg() {
           <line key={x} x1={x} y1="216" x2={x} y2="286" stroke="#111" strokeWidth="0.8" opacity="0.5" />
         ))}
         <line x1="720" y1="251" x2="868" y2="251" stroke="#111" strokeWidth="0.7" opacity="0.4" />
-        <line x1="727" y1="219" x2="758" y2="240" stroke="white" strokeWidth="1.8" opacity="0.6" />
+        <motion.line x1="727" y1="219" x2="758" y2="240" stroke="white" strokeWidth="1.8" {...gleamAnim(0.6)} />
 
         {/* ── Sliding doors lower ── */}
         <rect x="720" y="296" width="148" height="64" fill="url(#glass)" stroke="#111" strokeWidth="1.3" />
         <line x1="794" y1="296" x2="794" y2="360" stroke="#111" strokeWidth="0.9" />
-        <line x1="727" y1="300" x2="758" y2="318" stroke="white" strokeWidth="1.8" opacity="0.55" />
+        <motion.line x1="727" y1="300" x2="758" y2="318" stroke="white" strokeWidth="1.8" {...gleamAnim(1.1)} />
 
         {/* ── Wood cladding panel right ── */}
         <rect x="876" y="206" width="64" height="154" fill="#e2e2e2" stroke="#111" strokeWidth="1.3" />
@@ -212,16 +244,16 @@ export default function LuxuryVillaColorSvg() {
          ══════════════════════════════════════ */}
       <motion.g {...fade(1.1, 0.7)}>
         {/* Pool body */}
-        <rect x="110" y="368" width="360" height="32" rx="2" fill="#f0f0f0" stroke="#111" strokeWidth="1.5" />
+        <rect x="110" y="368" width="360" height="32" rx="2" fill="#7dd3fc" opacity="0.8" stroke="#111" strokeWidth="1.5" />
         {/* Coping edge */}
         <rect x="108" y="366" width="364" height="6" fill="#dcdcdc" stroke="#111" strokeWidth="1" />
         {/* Water surface lines */}
-        <line x1="130" y1="378" x2="300" y2="378" stroke="#aaa" strokeWidth="0.8" strokeDasharray="18 10" />
-        <line x1="180" y1="386" x2="390" y2="386" stroke="#aaa" strokeWidth="0.7" strokeDasharray="14 12" />
+        <line x1="130" y1="378" x2="300" y2="378" stroke="#ffffff" strokeWidth="1.2" strokeDasharray="18 10" />
+        <line x1="180" y1="386" x2="390" y2="386" stroke="#ffffff" strokeWidth="1" strokeDasharray="14 12" />
         {/* Wave paths */}
-        <path d="M128 374 Q148 371 168 374 Q188 371 208 374" stroke="#999" strokeWidth="0.9" fill="none" />
-        <path d="M240 380 Q265 377 290 380 Q315 377 340 380" stroke="#999" strokeWidth="0.9" fill="none" />
-        <path d="M160 390 Q185 387 210 390 Q235 387 260 390" stroke="#999" strokeWidth="0.8" fill="none" opacity="0.6" />
+        <path d="M128 374 Q148 371 168 374 Q188 371 208 374" stroke="#0284c7" strokeWidth="0.9" fill="none" opacity="0.6" />
+        <path d="M240 380 Q265 377 290 380 Q315 377 340 380" stroke="#0284c7" strokeWidth="0.9" fill="none" opacity="0.6" />
+        <path d="M160 390 Q185 387 210 390 Q235 387 260 390" stroke="#0284c7" strokeWidth="0.8" fill="none" opacity="0.4" />
         {/* Ladder */}
         <line x1="452" y1="366" x2="458" y2="400" stroke="#111" strokeWidth="1.2" opacity="0.5" />
         <line x1="463" y1="366" x2="469" y2="400" stroke="#111" strokeWidth="1.2" opacity="0.5" />
@@ -363,57 +395,43 @@ export default function LuxuryVillaColorSvg() {
       </motion.g>
 
       {/* ══════════════════════════════════════
-          BIRDS — life detail
+          BIRDS — life detail (Scattered Flock)
          ══════════════════════════════════════ */}
-      <motion.g {...fade(2.1, 0.9)} opacity="0.28">
-        <motion.path 
-          stroke="#111" strokeWidth="1.3" fill="none" 
-          animate={{ 
-            d: ["M580 36 Q586 31 592 36", "M580 36 Q586 39 592 36", "M580 36 Q586 31 592 36"],
-            y: [0, -6, 0],
-            x: [0, -12, 0]
-          }}
-          transition={{ 
-            d: { duration: 1.2, repeat: Infinity, ease: "easeInOut" },
-            default: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }
-          }}
-        />
-        <motion.path 
-          stroke="#111" strokeWidth="1.3" fill="none" 
-          animate={{ 
-            d: ["M604 26 Q610 21 616 26", "M604 26 Q610 29 616 26", "M604 26 Q610 21 616 26"],
-            y: [0, 5, 0],
-            x: [0, -15, 0]
-          }}
-          transition={{ 
-            d: { duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 },
-            default: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }
-          }}
-        />
-        <motion.path 
-          stroke="#111" strokeWidth="1.2" fill="none" 
-          animate={{ 
-            d: ["M628 40 Q633 36 638 40", "M628 40 Q633 43 638 40", "M628 40 Q633 36 638 40"],
-            y: [0, -4, 0],
-            x: [0, -10, 0]
-          }}
-          transition={{ 
-            d: { duration: 1.0, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
-            default: { duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
-          }}
-        />
-        <motion.path 
-          stroke="#111" strokeWidth="1.1" fill="none" 
-          animate={{ 
-            d: ["M650 30 Q654 27 658 30", "M650 30 Q654 33 658 30", "M650 30 Q654 27 658 30"],
-            y: [0, 3, 0],
-            x: [0, -8, 0]
-          }}
-          transition={{ 
-            d: { duration: 1.3, repeat: Infinity, ease: "easeInOut", delay: 0.1 },
-            default: { duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }
-          }}
-        />
+      <motion.g initial={{ opacity: 0 }} animate={{ opacity: 0.6 }} transition={{ delay: 1.0, duration: 2.0 }}>
+        {birdsData.map(bird => {
+          // Calculate an offscreen start position to simulate "delay" without breaking loops
+          // This guarantees they ALWAYS start far to the right, out of view.
+          const startX = 1100 + (bird.delay * 80);
+          const endX = -300;
+          
+          // Normalize duration so they fly at their designated speed regardless of startX
+          const baseDistance = 1400; // 1100 to -300
+          const speed = baseDistance / bird.flightDur; 
+          const distance = startX - endX;
+          const actualDuration = distance / speed;
+
+          return (
+            <motion.g
+              key={bird.id}
+              initial={{ x: startX, y: bird.yOffset, scale: bird.scale }}
+              animate={{ x: [startX, endX] }}
+              transition={{
+                x: { duration: actualDuration, repeat: Infinity, ease: "linear" }
+              }}
+            >
+              <motion.path
+                stroke="#111" strokeWidth={1.5} fill="none" strokeLinecap="round"
+                animate={{
+                  d: ["M0 36 Q6 30 12 36", "M0 36 Q6 42 12 36", "M0 36 Q6 30 12 36"],
+                  y: [0, -6, 0]
+                }}
+                transition={{
+                  duration: bird.flapSpeed, repeat: Infinity, ease: "easeInOut"
+                }}
+              />
+            </motion.g>
+          );
+        })}
       </motion.g>
     </motion.svg>
   );

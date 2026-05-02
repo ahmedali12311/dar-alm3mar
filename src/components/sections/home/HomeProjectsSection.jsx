@@ -1,19 +1,25 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { featuredProjects } from "../../../site-data";
 import { containerClass, pageSectionClass } from "../../../lib/ui";
+import useCompactViewport from "../../../hooks/useCompactViewport";
 
 export default function HomeProjectsSection() {
   const projects = featuredProjects.slice(0, 3);
+  const reduceMotion = useReducedMotion();
+  const isCompactViewport = useCompactViewport(900);
+  const shouldAnimateShapes = !reduceMotion && !isCompactViewport;
 
   return (
-    <section className={`${pageSectionClass} bg-white overflow-hidden`}>
+    <section className={`${pageSectionClass} content-visibility-auto bg-white overflow-hidden`}>
       <div className={containerClass}>
         {/* Header */}
         <div className="mb-24 flex flex-col items-center text-center">
           <motion.span 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="mb-4 text-[10px] font-black uppercase tracking-[0.5em] text-[#0284c7]"
           >
             التميز المعماري
@@ -21,7 +27,8 @@ export default function HomeProjectsSection() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.6 }}
             className="font-['Cairo'] text-5xl font-black text-slate-900 md:text-6xl"
           >
             مشاريع <span className="text-[#0284c7]">مختارة</span>
@@ -35,7 +42,7 @@ export default function HomeProjectsSection() {
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-80px" }}
               className={`group relative ${
                 index === 0 ? "lg:mt-0" : index === 1 ? "lg:mt-24" : "lg:mt-48"
               }`}
@@ -47,24 +54,35 @@ export default function HomeProjectsSection() {
               {/* Morphing Image Container */}
               <motion.div 
                 className="relative aspect-[3/4] overflow-hidden bg-slate-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-shadow duration-700 group-hover:shadow-[0_40px_80px_-15px_rgba(2, 132, 199,0.15)]"
-                // هنا السحر: تغيير الـ Border Radius بشكل مستمر وانسيابي
-                animate={{
-                  borderRadius: [
-                    "100px 24px 100px 24px", 
-                    "40px 100px 40px 100px", 
-                    "100px 24px 100px 24px"
-                  ],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 1 // عشان ما يتحركوا كلهم بنفس اللحظة
-                }}
+                animate={
+                  shouldAnimateShapes
+                    ? {
+                        borderRadius: [
+                          "100px 24px 100px 24px",
+                          "40px 100px 40px 100px",
+                          "100px 24px 100px 24px",
+                        ],
+                      }
+                    : {
+                        borderRadius: "100px 24px 100px 24px",
+                      }
+                }
+                transition={
+                  shouldAnimateShapes
+                    ? {
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 1,
+                      }
+                    : { duration: 0 }
+                }
               >
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-[3s] group-hover:scale-110"
                 />
                 

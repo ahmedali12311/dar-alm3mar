@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import ModernHouseModel from "../../models/ModernHouseModel";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { homeServices } from "../../../site-data";
 import {
   containerClass,
@@ -8,6 +8,9 @@ import {
   paragraphClass,
   sectionHeadingClass,
 } from "../../../lib/ui";
+import useDeferredMount from "../../../hooks/useDeferredMount";
+
+const ModernHouseModel = lazy(() => import("../../models/ModernHouseModel"));
 
 const serviceVisuals = [
   {
@@ -89,7 +92,7 @@ export default function HomeServicesSection() {
   };
 
   return (
-    <section className={`${pageSectionClass} bg-[#fdfdfd] py-24 lg:py-32`}>
+    <section className={`${pageSectionClass} content-visibility-auto bg-[#fdfdfd] py-24 lg:py-32`}>
       <div className={containerClass}>
         <div className="grid gap-16 lg:grid-cols-[minmax(20rem,0.8fr)_minmax(0,1.2fr)]">
           
@@ -185,44 +188,83 @@ function ServiceVisual({ visual, index, isLoaded, onImageLoad }) {
 
   return (
     <div className={`flex items-center justify-center ${visual.wrapperClass}`}>
-      <img
-        src={visual.src}
-        alt={visual.alt}
-        onLoad={() => onImageLoad(index)}
-        className={`${visual.imageClass} h-auto transition-all duration-1000 ${
-          isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-8 opacity-0 scale-90"
-        }`}
-        style={{ filter: "drop-shadow(0 18px 30px rgba(15,23,42,0.1))" }}
-      />
+      {visual.src === "/images/helmet.webp" ? (
+        <picture>
+          <source srcSet="/images/helmet.webp" type="image/webp" />
+          <img
+            src="/images/Helmet.png"
+            alt={visual.alt}
+            onLoad={() => onImageLoad(index)}
+            loading="lazy"
+            decoding="async"
+            className={`${visual.imageClass} h-auto transition-all duration-1000 ${
+              isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-8 opacity-0 scale-90"
+            }`}
+            style={{ filter: "drop-shadow(0 18px 30px rgba(15,23,42,0.1))" }}
+          />
+        </picture>
+      ) : (
+        <img
+          src={visual.src}
+          alt={visual.alt}
+          onLoad={() => onImageLoad(index)}
+          loading="lazy"
+          decoding="async"
+          className={`${visual.imageClass} h-auto transition-all duration-1000 ${
+            isLoaded ? "translate-y-0 opacity-100 scale-100" : "translate-y-8 opacity-0 scale-90"
+          }`}
+          style={{ filter: "drop-shadow(0 18px 30px rgba(15,23,42,0.1))" }}
+        />
+      )}
     </div>
   );
 }
 
 function InteractiveModelVisual({ wrapperClass }) {
-  const [tilt, setTilt] = useState({ rotateX: 10, rotateY: -20, scale: 0.45 });
+  const [mountRef, shouldMountModel] = useDeferredMount({
+    rootMargin: "420px 0px",
+    idleTimeout: 2200,
+  });
+
+  // Use MotionValues for high-performance tilting without re-renders
+  const tiltX = useMotionValue(10);
+  const tiltY = useMotionValue(-20);
+  const tiltScale = useMotionValue(0.45);
+
+  const springTiltX = useSpring(tiltX, { stiffness: 60, damping: 20 });
+  const springTiltY = useSpring(tiltY, { stiffness: 60, damping: 20 });
+  const springScale = useSpring(tiltScale, { stiffness: 60, damping: 20 });
 
   const handlePointerMove = (event) => {
     const bounds = event.currentTarget.getBoundingClientRect();
     const relativeX = (event.clientX - bounds.left) / bounds.width;
     const relativeY = (event.clientY - bounds.top) / bounds.height;
-    setTilt({ rotateX: 15 - relativeY * 10, rotateY: -25 + relativeX * 15, scale: 0.48 });
+    
+    tiltX.set(15 - relativeY * 10);
+    tiltY.set(-25 + relativeX * 15);
+    tiltScale.set(0.48);
   };
 
   const handlePointerLeave = () => {
-    setTilt({ rotateX: 10, rotateY: -20, scale: 0.45 });
+    tiltX.set(10);
+    tiltY.set(-20);
+    tiltScale.set(0.45);
   };
 
   return (
     <div
+      ref={mountRef}
       className={`relative flex items-center justify-center h-[9rem] w-[9rem] sm:h-[12rem] sm:w-[12rem] md:h-[14rem] md:w-[18rem] lg:w-[21rem] [perspective:3000px] overflow-visible`}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
     >
       <div className="absolute inset-x-[20%] bottom-2 h-4 rounded-full bg-slate-900/10 blur-xl" />
-      <div
-        className="absolute transition-transform duration-500 ease-out [transform-style:preserve-3d] will-change-transform"
+      <motion.div
+        className="absolute [transform-style:preserve-3d] will-change-transform"
         style={{
-          transform: `scale(${tilt.scale}) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+          rotateX: springTiltX,
+          rotateY: springTiltY,
+          scale: springScale,
           width: '200%',
           height: '200%',
           display: 'flex',
@@ -230,8 +272,12 @@ function InteractiveModelVisual({ wrapperClass }) {
           justifyContent: 'center'
         }}
       >
-        <ModernHouseModel />
-      </div>
+        {shouldMountModel ? (
+          <Suspense fallback={null}>
+            <ModernHouseModel />
+          </Suspense>
+        ) : null}
+      </motion.div>
     </div>
   );
 }

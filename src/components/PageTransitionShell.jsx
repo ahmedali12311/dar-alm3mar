@@ -1,71 +1,100 @@
-import { cloneElement, isValidElement, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const EXIT_MS = 220;
-const ENTER_MS = 640;
-
-export default function PageTransitionShell({ children, location, transitionKey }) {
-  const [displayLocation, setDisplayLocation] = useState(location);
-  const [displayKey, setDisplayKey] = useState(transitionKey);
-  const [phase, setPhase] = useState("idle");
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const pendingLocationRef = useRef(location);
-  const pendingKeyRef = useRef(transitionKey);
-  const firstRenderRef = useRef(true);
-
-  useEffect(() => {
-    const mq = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    if (!mq) return;
-    const sync = () => setPrefersReducedMotion(mq.matches);
-    sync();
-    mq.addEventListener?.("change", sync);
-    return () => mq.removeEventListener?.("change", sync);
-  }, []);
-
-  useEffect(() => {
-    if (firstRenderRef.current) { firstRenderRef.current = false; return; }
-    if (transitionKey === displayKey) return;
-    pendingLocationRef.current = location;
-    pendingKeyRef.current = transitionKey;
-
-    if (prefersReducedMotion) {
-      window.scrollTo({ top: 0, behavior: "auto" });
-      setDisplayLocation(location);
-      setDisplayKey(transitionKey);
-      return;
+const contentVariants = {
+  initial: {
+    opacity: 0,
+    y: 30,
+    scale: 0.96,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.9,
+      ease: [0.16, 1, 0.3, 1], // Extra smooth, premium deceleration
+      delay: 0.35, 
     }
-    setPhase("exit");
-  }, [displayKey, location, prefersReducedMotion, transitionKey]);
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.96,
+    transition: {
+      duration: 0.4,
+      ease: [0.32, 0, 0.67, 0]
+    }
+  }
+};
 
-  useEffect(() => {
-    if (phase !== "exit") return;
-    const t = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "auto" });
-      setDisplayLocation(pendingLocationRef.current);
-      setDisplayKey(pendingKeyRef.current);
-      setPhase("enter");
-    }, EXIT_MS);
-    return () => clearTimeout(t);
-  }, [phase]);
+const primaryWipe = {
+  initial: { scaleY: 1, transformOrigin: "top" },
+  animate: { 
+    scaleY: 0, 
+    transformOrigin: "top",
+    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0 } 
+  },
+  exit: { 
+    scaleY: 1, 
+    transformOrigin: "bottom",
+    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.1 } 
+  }
+};
 
-  useEffect(() => {
-    if (phase !== "enter") return;
-    const t = setTimeout(() => setPhase("idle"), ENTER_MS);
-    return () => clearTimeout(t);
-  }, [phase]);
+const secondaryWipe = {
+  initial: { scaleY: 1, transformOrigin: "top" },
+  animate: { 
+    scaleY: 0, 
+    transformOrigin: "top",
+    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.15 } 
+  },
+  exit: { 
+    scaleY: 1, 
+    transformOrigin: "bottom",
+    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0 } 
+  }
+};
 
-  const routedChildren =
-    isValidElement(children) && typeof children.type !== "string"
-      ? cloneElement(children, { location: displayLocation })
-      : children;
-
+export default function PageTransitionShell({ children, transitionKey }) {
   return (
-    <div className={`page-shell page-shell--${phase}`}>
-      <div key={displayKey} className="page-shell__content">
-        {routedChildren}
-      </div>
-      <div className="page-shell__overlay" aria-hidden="true">
-        <div className="page-shell__beam" />
-      </div>
+    <div className="relative min-h-screen w-full bg-[#f4f5ec]">
+      <AnimatePresence
+        mode="wait"
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        <motion.div
+          key={transitionKey}
+          className="relative w-full min-h-screen"
+        >
+          {/* Transition Overlay Wipes */}
+          <motion.div
+            className="fixed inset-0 z-[100] bg-[#5a5c3b] pointer-events-none"
+            variants={primaryWipe}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          />
+          <motion.div
+            className="fixed inset-0 z-[99] bg-[#c8d44b] pointer-events-none"
+            variants={secondaryWipe}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          />
+
+          {/* Page Content */}
+          <motion.div
+            variants={contentVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="w-full min-h-screen"
+          >
+            {children}
+          </motion.div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
+

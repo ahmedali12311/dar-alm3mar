@@ -4,7 +4,7 @@ import { containerClass } from "../../../lib/ui";
 
 export default function ProjectsDetailsSection() {
   return (
-    <section className="relative bg-white py-24 sm:py-32 overflow-hidden">
+    <section className="content-visibility-auto relative overflow-hidden bg-white py-24 sm:py-32">
       {/* Subtle background pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.018]"
@@ -46,6 +46,7 @@ export default function ProjectsDetailsSection() {
                   src={project.image}
                   alt={project.title}
                   loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Overlay */}

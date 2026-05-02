@@ -17,8 +17,9 @@ function CloudMark({
         <img
           alt=""
           className={`absolute inset-0 h-full w-full object-contain ${imageClassName}`}
-          loading="eager"
-          src="/images/CLOUSD.png"
+          loading="lazy"
+          decoding="async"
+          src="/images/CLOUSD.webp"
           style={{
             filter:
               "brightness(1.04) saturate(0.9) contrast(1.02) drop-shadow(0 24px 34px rgba(6,10,14,0.26))",
@@ -56,25 +57,28 @@ export default function HomeHeroSection() {
       <img
         alt=""
         aria-hidden="true"
-        className={`absolute inset-0 z-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${isImageLoaded ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
+        className={`gpu-layer absolute inset-0 z-0 h-full w-full object-cover object-top transition-[opacity,transform] duration-[1400ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${isImageLoaded ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
           }`}
+        decoding="async"
+        fetchPriority="high"
         loading="eager"
         onLoad={() => setIsImageLoaded(true)}
-        src="/images/HOUSE.webp"
+        src="/images/HOUSE-hero.webp"
         style={{
           filter: "brightness(0.82) saturate(0.92) contrast(1.04)",
           transformOrigin: "center top",
         }}
       />
 
-      <div className={`pointer-events-none absolute inset-0 z-30 ${overlayOffsetClass}`}>
+      <div className={`gpu-layer pointer-events-none absolute inset-0 z-30 ${overlayOffsetClass}`}>
         <img
           alt=""
           aria-hidden="true"
           className={`h-full w-full object-cover object-top transition-[opacity,transform] duration-[1400ms] ${isImageLoaded ? "scale-100 opacity-100" : "scale-[1.03] opacity-0"
             }`}
+          decoding="async"
           loading="eager"
-          src="/images/on-top.png"
+          src="/images/on-top.webp"
           style={{
             filter:
               "brightness(0.92) saturate(0.96) drop-shadow(0 34px 60px rgba(18,24,30,0.3))",
@@ -115,7 +119,7 @@ export default function HomeHeroSection() {
           <div className={`flex flex-col lg:flex-row justify-between items-end gap-6 sm:gap-10 lg:gap-12 transition-all duration-700 delay-100 ${isImageLoaded ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
 
             {/* المحتوى الرئيسي للموبايل والويب - مضمون وجوده على اليمين دائماً */}
-            <div className="w-full flex justify-start"> 
+            <div className="w-full flex justify-start">
               <div className="max-w-2xl text-right">
                 <h2 className="font-['Cairo'] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.25] drop-shadow-lg">
                   نصيغ الفراغ.. <br />

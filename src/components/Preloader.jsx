@@ -4,11 +4,12 @@ import LogoSvg from "./sections/gallery/LogoSvg";
 
 export default function Preloader({ onComplete }) {
   useEffect(() => {
-    // The logo drawing takes 3.5s + 1.5s fill delay. 
-    // We'll let it finish drawing and filling, then dismiss.
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const duration = reduceMotion ? 700 : 1650;
+
     const timer = setTimeout(() => {
       onComplete();
-    }, 4500);
+    }, duration);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -18,7 +19,7 @@ export default function Preloader({ onComplete }) {
       className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-white"
       initial={{ y: 0 }}
       exit={{ y: "-100%" }}
-      transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
     >
       <div className="h-[220px] w-[220px] sm:h-[280px] sm:w-[280px]">
         <LogoSvg />
@@ -27,7 +28,7 @@ export default function Preloader({ onComplete }) {
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3.5, duration: 0.8 }}
+        transition={{ delay: 0.72, duration: 0.45 }}
         className="mt-8 flex items-center gap-4"
       >
         <span className="h-px w-8 bg-[#111111]" />

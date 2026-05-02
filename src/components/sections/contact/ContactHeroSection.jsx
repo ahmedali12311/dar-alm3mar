@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { containerClass } from "../../../lib/ui";
+import useCompactViewport from "../../../hooks/useCompactViewport";
 
 // Depth: offset copies shifted down-right to simulate isometric thickness
 // The map stays flat/upright — depth is shown via 2D offsets
@@ -11,10 +12,13 @@ const DEPTH_LAYERS = [
 
 export default function ContactHeroSection() {
   const [isHovering, setIsHovering] = useState(false);
+  const isCompactViewport = useCompactViewport(900);
+  const mapSrc = "/images/libya-admin1.svg";
+  const depthLayers = isCompactViewport ? DEPTH_LAYERS.slice(1, 2) : DEPTH_LAYERS;
 
   return (
-    <section className="relative min-h-[85vh] bg-white overflow-hidden flex items-center border-b border-slate-100 py-16 md:py-0">
-      <div className={`${containerClass} relative z-10 grid grid-cols-1 md:grid-cols-[0.8fr_1.2fr] items-center gap-12 md:gap-16`}>
+    <section className="relative flex min-h-[85vh] items-center overflow-hidden border-b border-slate-100 bg-white pb-16 pt-32 sm:pt-36 md:py-0">
+      <div className={`${containerClass} relative z-10 grid grid-cols-1 items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16`}>
 
         {/* 1. Hero Text Side */}
         <div className="relative z-20 w-full p-6 md:p-10 border-r-8 border-[#0284c7] text-right">
@@ -28,9 +32,9 @@ export default function ContactHeroSection() {
 
         {/* 2. Map Side */}
         <div
-          className="relative w-full flex justify-center items-center py-8"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
+          className="relative flex w-full items-center justify-center py-4 sm:py-8"
+          onMouseEnter={() => !isCompactViewport && setIsHovering(true)}
+          onMouseLeave={() => !isCompactViewport && setIsHovering(false)}
         >
           {/* Map wrapper — fixed size, position:relative for stacking */}
           <div
@@ -42,12 +46,14 @@ export default function ContactHeroSection() {
             }}
           >
             {/* ── DEPTH LAYERS: offset copies below/behind the main map ── */}
-            {DEPTH_LAYERS.map(({ x, y, brightness }) => (
+            {depthLayers.map(({ x, y, brightness }) => (
               <img
                 key={`depth-${x}`}
-                src="https://simplemaps.com/static/svg/country/ly/admin1/ly.svg"
+                src={mapSrc}
                 alt=""
                 aria-hidden="true"
+                loading="lazy"
+                decoding="async"
                 style={{
                   position: "absolute",
                   inset: 0,
@@ -65,16 +71,18 @@ export default function ContactHeroSection() {
 
             {/* ── TOP FACE: main map, flat and upright ── */}
             <img
-              src="https://simplemaps.com/static/svg/country/ly/admin1/ly.svg"
+              src={mapSrc}
               alt="Libya Map"
+              loading="lazy"
+              decoding="async"
               style={{
                 position: "absolute",
                 inset: 0,
                 width: "100%",
                 height: "100%",
                 objectFit: "contain",
-                opacity: isHovering ? 0.85 : 0.7,
-                filter: isHovering
+                opacity: isCompactViewport ? 0.78 : isHovering ? 0.85 : 0.7,
+                filter: !isCompactViewport && isHovering
                   ? "contrast(1.1) sepia(50%) hue-rotate(150deg) saturate(4) brightness(1.0)"
                   : "contrast(1.2) sepia(50%) hue-rotate(150deg) saturate(5) brightness(0.8)",
                 transition: "opacity 0.5s ease, filter 0.5s ease",
@@ -91,13 +99,13 @@ export default function ContactHeroSection() {
               className="absolute"
               style={{ top: "9%", left: "67%", zIndex: 50, transform: "translate(-50%, -50%)" }}
             >
-              <div className="relative flex h-16 w-16 items-center justify-center cursor-pointer">
+              <div className="relative flex h-14 w-14 cursor-pointer items-center justify-center sm:h-16 sm:w-16">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0e7490]/25 opacity-75" />
-                <span className="absolute inline-flex h-12 w-12 rounded-full bg-[#0e7490]/10" />
+                <span className="absolute inline-flex h-10 w-10 rounded-full bg-[#0e7490]/10 sm:h-12 sm:w-12" />
                 <span
-                  className="relative inline-flex rounded-full h-7 w-7 bg-[#0e7490] border-[3px] border-white"
+                  className="relative inline-flex h-6 w-6 rounded-full border-[3px] border-white bg-[#0e7490] sm:h-7 sm:w-7"
                   style={{
-                    boxShadow: isHovering
+                    boxShadow: !isCompactViewport && isHovering
                       ? "0 0 0 5px rgba(14,116,144,0.25), 0 0 28px rgba(14,116,144,0.7)"
                       : "0 0 18px rgba(14,116,144,0.8), 0 2px 8px rgba(0,0,0,0.2)",
                     transition: "box-shadow 0.4s ease",
@@ -113,8 +121,8 @@ export default function ContactHeroSection() {
                   left: "50%",
                   transform: "translateX(-50%) translateY(8px)",
                   width: "260px",
-                  opacity: isHovering ? 1 : 0,
-                  pointerEvents: isHovering ? "auto" : "none",
+                  opacity: !isCompactViewport && isHovering ? 1 : 0,
+                  pointerEvents: !isCompactViewport && isHovering ? "auto" : "none",
                   transition: "opacity 0.35s ease 0.15s",
                   zIndex: 60,
                 }}

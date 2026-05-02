@@ -1,15 +1,28 @@
 import { motion } from "framer-motion";
 import { containerClass } from "../../../lib/ui";
 import LogoSvg from "./LogoSvg";
+import useCompactViewport from "../../../hooks/useCompactViewport";
 
 export default function GalleryHeroSection() {
+  const isCompactViewport = useCompactViewport(900);
+
   return (
-    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-[#f1f5f9] pt-40 pb-20">
+    <section className="relative flex flex-col items-center justify-center overflow-hidden bg-[#f1f5f9] pb-20 pt-32 sm:pt-40">
       <div className={`${containerClass} flex flex-col items-center z-10`}>
         
         {/* Animated Exact Logo Drawing */}
         <div className="relative mb-10 h-[220px] w-[220px] sm:h-[280px] sm:w-[280px] flex items-center justify-center">
-          <LogoSvg />
+          {isCompactViewport ? (
+            <img
+              src="/images/logo.svg"
+              alt="شعار دار المعمار"
+              className="h-full w-full object-contain"
+              loading="eager"
+              decoding="async"
+            />
+          ) : (
+            <LogoSvg />
+          )}
         </div>
 
         {/* Header Text */}

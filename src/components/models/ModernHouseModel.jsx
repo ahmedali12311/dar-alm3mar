@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const palette = {
   plaster: "linear-gradient(162deg, #ffffff 0%, #f3f6f9 48%, #dfe6ed 100%)",
   plasterSoft: "linear-gradient(162deg, #fbfdff 0%, #e8edf3 100%)",
@@ -24,7 +26,7 @@ const palette = {
   soil: "linear-gradient(180deg, #504842 0%, #26231f 100%)",
 };
 
-export default function ModernHouseModel() {
+const ModernHouseModel = memo(function ModernHouseModel() {
   return (
     <div className="absolute inset-0 [transform-style:preserve-3d]">
       <ScenePlane
@@ -297,7 +299,9 @@ export default function ModernHouseModel() {
       <Planter foliage={palette.leafDark} height={16} size={22} x={298} z={98} />
     </div>
   );
-}
+});
+
+export default ModernHouseModel;
 
 function SceneBox({
   x,

@@ -284,7 +284,7 @@ export default function VillaSketchSvg() {
       <motion.text x="450" y="28" textAnchor="middle" fill="#0284c7" fontSize="11"
         fontFamily="monospace" letterSpacing="4" opacity="0.65"
         initial={{ opacity: 0 }} animate={{ opacity: 0.65 }} transition={{ delay: 1.2, duration: 0.8 }}>
-        دار المعمار — فيلا سكنية فاخرة
+        القمة — فيلا سكنية فاخرة
       </motion.text>
       <motion.text x="878" y="492" textAnchor="end" fill="#0284c7" fontSize="7.5"
         fontFamily="monospace" opacity="0.5"
